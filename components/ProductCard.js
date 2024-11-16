@@ -41,10 +41,6 @@ const ProductCard = ({ product }) => {
           {/* Product details grid */}
           <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
             <div>
-              <span className="font-medium">Price:</span>
-              <span className="ml-1">${typeof product.price === 'number' ? product.price.toFixed(2) : '0.00'}</span>
-            </div>
-            <div>
               <span className="font-medium">Quantity:</span>
               <span className="ml-1">{product.quantity}</span>
             </div>
@@ -52,6 +48,13 @@ const ProductCard = ({ product }) => {
               <span className="font-medium">Dimensions:</span>
               <span className="ml-1">{product.dimensions || 'N/A'}</span>
             </div>
+          </div>
+
+          <div className="mt-2">
+            <p className="text-lg font-semibold text-gray-900">
+              ${typeof product.price === 'number' ? product.price.toFixed(2) : '0.00'}{' '}
+              <span className="text-sm font-normal text-gray-600">per week</span>
+            </p>
           </div>
 
           {/* Add/Remove from List button */}

@@ -65,7 +65,10 @@ const WishlistSidebar = ({ isOpen, onClose }) => {
                   <div className="flex-grow min-w-0">
                     <h3 className="font-medium text-gray-900 truncate">{product.name}</h3>
                     <p className="text-sm text-gray-500 truncate">{product.dimensions}</p>
-                    <p className="text-sm font-medium text-gray-900">${product.price?.toFixed(2) || '0.00'}</p>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-600">Price:</span>
+                      <span className="font-semibold">${product.price?.toFixed(2) || '0.00'}/week</span>
+                    </div>
                   </div>
 
                   {/* Remove Button */}
@@ -92,7 +95,11 @@ const WishlistSidebar = ({ isOpen, onClose }) => {
           </div>
           <div className="flex justify-between mb-4">
             <span className="text-gray-600">Total Price:</span>
-            <span className="font-medium">${totalPrice.toFixed(2)}</span>
+            <span className="font-medium">${totalPrice.toFixed(2)}/week</span>
+          </div>
+          <div className="flex justify-between items-center border-t pt-4">
+            <span className="text-lg font-medium">Total</span>
+            <span className="text-lg font-bold">${totalPrice.toFixed(2)}/week</span>
           </div>
           <button
             className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

@@ -39,7 +39,14 @@ const ProductModal = ({ product, onClose, onAdd, isSelected }) => {
               <dl className="space-y-2">
                 <div>
                   <dt className="font-medium text-gray-700">Price</dt>
-                  <dd className="text-gray-900">${typeof product.price === 'number' ? product.price.toFixed(2) : '0.00'}</dd>
+                  <dd className="text-gray-900">
+                    <div className="mt-4">
+                      <p className="text-2xl font-bold text-gray-900">
+                        ${typeof product.price === 'number' ? product.price.toFixed(2) : '0.00'}{' '}
+                        <span className="text-lg font-normal text-gray-600">per week</span>
+                      </p>
+                    </div>
+                  </dd>
                 </div>
                 <div>
                   <dt className="font-medium text-gray-700">Dimensions</dt>
