@@ -1,6 +1,17 @@
 import React from 'react';
+import { useProducts } from '../context/ProductContext';
+import ProductCard from '../components/ProductCard';
+import SearchBar from '../components/SearchBar';
 
 const Home = () => {
+  const { products, addProduct, searchQuery } = useProducts();
+
+  // Filter products based on search query
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.dimensions.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div>
       {/* Navigation */}
@@ -37,12 +48,32 @@ const Home = () => {
 
       {/* Products Section */}
       <div className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold mb-8 text-primary-900">
-          Available Props
-        </h2>
-        <div className="text-center text-gray-600">
-          <p>Please check back soon - our product catalog is being updated.</p>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-primary-900">
+            Available Props
+          </h2>
+          <SearchBar />
         </div>
+        
+        {products.length === 0 ? (
+          <div className="text-center text-gray-600">
+            <p>Loading products...</p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="text-center text-gray-600">
+            <p>No products found matching your search.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                onAdd={addProduct}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

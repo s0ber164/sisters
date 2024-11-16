@@ -1,6 +1,6 @@
 import { IncomingForm } from 'formidable';
 import { promises as fs } from 'fs';
-import csv from 'csv-parse';
+import { parse } from 'csv-parse/sync';
 import { connectToDatabase } from '../../../utils/mongodb';
 
 export const config = {
@@ -15,55 +15,65 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Parse form data
     const form = new IncomingForm();
-    
-    form.parse(req, async (err, fields, files) => {
-      if (err) {
-        return res.status(500).json({ error: 'Error parsing form data' });
-      }
-
-      const file = files.file[0];
-      const fileContent = await fs.readFile(file.filepath, 'utf-8');
-
-      // Parse CSV
-      csv.parse(fileContent, {
-        columns: true,
-        skip_empty_lines: true
-      }, async (error, records) => {
-        if (error) {
-          return res.status(400).json({ error: 'Error parsing CSV file' });
-        }
-
-        try {
-          const { db } = await connectToDatabase();
-          
-          // Format records
-          const products = records.map(record => ({
-            name: record.name,
-            description: record.description,
-            category: record.category,
-            price: parseFloat(record.price) || 0,
-            quantity: parseInt(record.quantity) || 0,
-            imageUrl: record.imageUrl || '',
-            createdAt: new Date(),
-            updatedAt: new Date()
-          }));
-
-          // Insert products
-          await db.collection('products').insertMany(products);
-
-          res.status(200).json({ 
-            message: 'Products uploaded successfully',
-            count: products.length 
-          });
-        } catch (dbError) {
-          console.error('Database error:', dbError);
-          res.status(500).json({ error: 'Error saving to database' });
-        }
+    const [fields, files] = await new Promise((resolve, reject) => {
+      form.parse(req, (err, fields, files) => {
+        if (err) reject(err);
+        resolve([fields, files]);
       });
     });
+
+    if (!files.file || !files.file[0]) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    // Read file content
+    const file = files.file[0];
+    const fileContent = await fs.readFile(file.filepath, 'utf-8');
+
+    // Parse CSV synchronously
+    const records = parse(fileContent, {
+      columns: true,
+      skip_empty_lines: true,
+      trim: true
+    });
+
+    // Connect to database
+    const { db } = await connectToDatabase();
+    
+    // Format records with required fields
+    const products = records.map(record => ({
+      name: record.name || '',
+      description: record.description || '',
+      category: record.category || 'Uncategorized',
+      price: parseFloat(record.price) || 0,
+      quantity: parseInt(record.quantity) || 0,
+      dimensions: record.dimensions || '',
+      images: record.images ? record.images.split(',').map(url => url.trim()) : [],
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }));
+
+    // Validate products
+    if (products.length === 0) {
+      return res.status(400).json({ error: 'No valid products found in CSV' });
+    }
+
+    // Insert products
+    const result = await db.collection('products').insertMany(products);
+
+    // Return success response
+    return res.status(200).json({ 
+      message: 'Products uploaded successfully',
+      count: result.insertedCount 
+    });
+
   } catch (error) {
     console.error('Upload error:', error);
-    res.status(500).json({ error: 'Server error' });
+    return res.status(500).json({ 
+      error: 'Error processing upload',
+      details: error.message 
+    });
   }
 }

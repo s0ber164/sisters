@@ -1,19 +1,22 @@
-import connectDB from '../../../lib/mongodb';
-import Product from '../../../models/Product';
+import { connectToDatabase } from '../../../utils/mongodb';
 
 export default async function handler(req, res) {
   console.log('API route hit:', req.method);
   
   try {
     console.log('Attempting to connect to MongoDB...');
-    await connectDB();
+    const { db } = await connectToDatabase();
     console.log('Connected to MongoDB in API route');
 
     switch (req.method) {
       case 'GET':
         try {
           console.log('Fetching products...');
-          const products = await Product.find({}).sort({ createdAt: -1 });
+          const products = await db.collection('products')
+            .find({})
+            .sort({ createdAt: -1 })
+            .toArray();
+          
           console.log('Products fetched:', products.length);
           res.status(200).json(products);
         } catch (error) {
@@ -47,9 +50,13 @@ export default async function handler(req, res) {
           });
 
           console.log('Processing products:', products.length);
-          const createdProducts = await Product.create(products);
-          console.log('Products created:', createdProducts.length);
-          res.status(201).json(createdProducts);
+          const result = await db.collection('products').insertMany(products);
+          console.log('Products created:', result.insertedCount);
+          res.status(201).json({ 
+            message: 'Products created successfully',
+            count: result.insertedCount,
+            products: result.ops
+          });
         } catch (error) {
           console.error('Error creating products:', error);
           res.status(400).json({ 
