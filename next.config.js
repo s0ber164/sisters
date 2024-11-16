@@ -4,7 +4,8 @@ const nextConfig = {
   images: {
     domains: [
       'images.squarespace-cdn.com',
-      'images.unsplash.com'
+      'images.unsplash.com',
+      'via.placeholder.com'
     ],
   },
 }

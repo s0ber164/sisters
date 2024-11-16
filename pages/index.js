@@ -1,33 +1,71 @@
-import React from 'react';
-import { useProducts } from '../context/ProductContext';
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
+import CategoryFilter from '../components/CategoryFilter';
+import WishlistSidebar from '../components/WishlistSidebar';
+import { useProducts } from '../context/ProductContext';
 
 const Home = () => {
-  const { products, addProduct, searchQuery } = useProducts();
+  const { products, addProduct, searchQuery, loading, error, selectedProducts } = useProducts();
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
-  // Filter products based on search query
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.dimensions.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    if (products) {
+      const filtered = products.filter(product => {
+        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.dimensions.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = activeCategory === 'all' || product.category?.toLowerCase() === activeCategory;
+        return matchesSearch && matchesCategory;
+      });
+      setFilteredProducts(filtered);
+    }
+  }, [products, searchQuery, activeCategory]);
+
+  const handleCategoryChange = (categoryId) => {
+    setActiveCategory(categoryId);
+  };
+
+  if (error) {
+    return <div className="text-center text-red-600 mt-8">Error loading products: {error}</div>;
+  }
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
+      <Head>
+        <title>SIS Props - Product Catalog</title>
+        <meta name="description" content="Browse our collection of props for film and theater" />
+      </Head>
+
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
+      <nav className="bg-white shadow-sm sticky top-0 z-30">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center">
             <h1 className="text-4xl text-primary-900 font-libre">
               <span className="font-bold">SIS</span>{' '}
               <span className="font-normal">PROPS</span>
             </h1>
-            <a
-              href="/admin/products"
-              className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
-            >
-              Manage Products
-            </a>
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setIsWishlistOpen(true)}
+                className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                  />
+                </svg>
+                <span className="font-medium">Wishlist ({selectedProducts.length})</span>
+              </button>
+              <a
+                href="/admin/products"
+                className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors"
+              >
+                Manage Products
+              </a>
+            </div>
           </div>
         </div>
       </nav>
@@ -53,7 +91,7 @@ const Home = () => {
       </div>
 
       {/* Products Section */}
-      <div className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-primary-900">
             Available Props
@@ -61,26 +99,35 @@ const Home = () => {
           <SearchBar />
         </div>
         
-        {products.length === 0 ? (
-          <div className="text-center text-gray-600">
-            <p>Loading products...</p>
+        <CategoryFilter 
+          activeCategory={activeCategory}
+          onCategoryChange={handleCategoryChange}
+        />
+
+        {loading ? (
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="text-center text-gray-600">
-            <p>No products found matching your search.</p>
+          <div className="text-center text-gray-600 mt-8">
+            <p>No products found matching your criteria.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <ProductCard
-                key={product._id}
-                product={product}
-                onAdd={addProduct}
-              />
+              <div key={product._id} className="w-full">
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
+
+      {/* Wishlist Sidebar */}
+      <WishlistSidebar 
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+      />
     </div>
   );
 };

@@ -42,15 +42,15 @@ export default async function handler(req, res) {
     // Connect to database
     const { db } = await connectToDatabase();
     
-    // Format records with required fields
-    const products = records.map(record => ({
+    // Map CSV columns to product fields
+    const products = records.map((record) => ({
       name: record.name || '',
       description: record.description || '',
-      category: record.category || 'Uncategorized',
       price: parseFloat(record.price) || 0,
       quantity: parseInt(record.quantity) || 0,
       dimensions: record.dimensions || '',
       images: record.images ? record.images.split(',').map(url => url.trim()) : [],
+      category: record.category ? record.category.toLowerCase() : 'decor', // Default to 'decor' if no category
       createdAt: new Date(),
       updatedAt: new Date()
     }));

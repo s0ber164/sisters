@@ -99,13 +99,13 @@ export const ProductProvider = ({ children }) => {
   };
 
   const addProduct = (product) => {
-    if (!selectedProducts.find(p => p.id === product.id)) {
+    if (!selectedProducts.find(p => p._id === product._id)) {
       setSelectedProducts([...selectedProducts, product]);
     }
   };
 
   const removeProduct = (product) => {
-    setSelectedProducts(selectedProducts.filter(p => p.id !== product.id));
+    setSelectedProducts(selectedProducts.filter(p => p._id !== product._id));
   };
 
   const deleteProduct = async (productId) => {
