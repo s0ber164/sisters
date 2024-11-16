@@ -1,0 +1,32 @@
+{
+  "name": "film-tv-prop-rental",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cookie": "^1.0.1",
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.1",
+    "formidable": "^3.5.2",
+    "jose": "^5.9.6",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.10.0",
+    "mongoose": "^8.8.1",
+    "next": "latest",
+    "nodemailer": "^6.9.16",
+    "papaparse": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15"
+  }
+}
