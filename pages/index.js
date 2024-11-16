@@ -22,6 +22,12 @@ const Home = () => {
               <span className="font-bold">SIS</span>{' '}
               <span className="font-normal">PROPS</span>
             </h1>
+            <a
+              href="/admin/products"
+              className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+            >
+              Manage Products
+            </a>
           </div>
         </div>
       </nav>
