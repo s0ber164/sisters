@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import ProductModal from './ProductModal';
 
 const ProductCard = ({ product, onAdd }) => {
   const [showModal, setShowModal] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  
   // Get the first image or use a placeholder
-  const imageUrl = product.images?.[0] || 'https://via.placeholder.com/300x200?text=No+Image';
+  const imageUrl = !imageError && product.images?.[0] 
+    ? product.images[0] 
+    : 'https://via.placeholder.com/300x400?text=No+Image';
 
   return (
     <>
@@ -12,15 +17,18 @@ const ProductCard = ({ product, onAdd }) => {
         className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-xl h-[32rem] flex flex-col cursor-pointer"
         onClick={() => setShowModal(true)}
       >
-        <div className="relative h-48 flex-shrink-0">
-          <img
-            src={imageUrl}
-            alt={product.name}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
-            }}
-          />
+        <div className="relative w-full pt-[133.33%]">
+          <div className="absolute inset-0">
+            <Image
+              src={imageUrl}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+              onError={() => setImageError(true)}
+              priority={false}
+            />
+          </div>
         </div>
         <div className="p-4 flex flex-col flex-grow">
           <h3 className="text-lg font-semibold text-primary-900 mb-3 line-clamp-2">{product.name}</h3>
@@ -53,28 +61,27 @@ const ProductCard = ({ product, onAdd }) => {
             <div className="flex items-center text-gray-700">
               <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                  d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" 
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" 
                 />
               </svg>
-              <span className="text-sm">{product.quantity} available</span>
+              <span className="text-sm">
+                {product.quantity} available
+              </span>
             </div>
           </div>
 
-          <button
-            onClick={() => onAdd(product)}
-            className="w-full mt-4 bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-600 transition-colors duration-200 flex items-center justify-center"
+          <button 
+            className="mt-4 w-full bg-primary-500 text-white py-2 rounded-md hover:bg-primary-600 transition-colors duration-200"
+            onClick={(e) => {
+              e.stopPropagation();
+              onAdd(product);
+            }}
           >
-            <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6" 
-              />
-            </svg>
-            Add to List
+            Request Quote
           </button>
         </div>
       </div>
 
-      {/* Product Modal */}
       {showModal && (
         <ProductModal
           product={product}
