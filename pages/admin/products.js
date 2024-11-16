@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useProducts } from '../../context/ProductContext';
+import Image from 'next/image';
 
 const AdminProducts = () => {
   const { products } = useProducts();
@@ -12,6 +13,7 @@ const AdminProducts = () => {
     quantity: '',
     images: []
   });
+  const [newImageUrl, setNewImageUrl] = useState('');
 
   const handleEdit = (product) => {
     setSelectedProduct(product);
@@ -71,6 +73,23 @@ const AdminProducts = () => {
     setFormData(prev => ({
       ...prev,
       [name]: name === 'price' || name === 'quantity' ? Number(value) : value
+    }));
+  };
+
+  const handleAddImage = () => {
+    if (newImageUrl && newImageUrl.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        images: [...prev.images, newImageUrl.trim()]
+      }));
+      setNewImageUrl('');
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
     }));
   };
 
@@ -134,6 +153,52 @@ const AdminProducts = () => {
                 required
               />
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Images</label>
+              <div className="space-y-2">
+                {formData.images.map((url, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <div className="relative w-16 h-16">
+                      <Image
+                        src={url}
+                        alt={`Product image ${index + 1}`}
+                        fill
+                        className="object-cover rounded"
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      value={url}
+                      readOnly
+                      className="flex-1 rounded-md border-gray-300 shadow-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <div className="flex space-x-2">
+                  <input
+                    type="text"
+                    value={newImageUrl}
+                    onChange={(e) => setNewImageUrl(e.target.value)}
+                    placeholder="Enter image URL"
+                    className="flex-1 rounded-md border-gray-300 shadow-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddImage}
+                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                  >
+                    Add Image
+                  </button>
+                </div>
+              </div>
+            </div>
             <div className="flex justify-end space-x-4">
               <button
                 type="button"
@@ -159,6 +224,7 @@ const AdminProducts = () => {
           <table className="min-w-full bg-white rounded-lg overflow-hidden">
             <thead className="bg-gray-100">
               <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dimensions</th>
@@ -169,6 +235,22 @@ const AdminProducts = () => {
             <tbody className="divide-y divide-gray-200">
               {products.map((product) => (
                 <tr key={product._id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {product.images && product.images.length > 0 ? (
+                      <div className="relative w-16 h-16">
+                        <Image
+                          src={product.images[0]}
+                          alt={product.name}
+                          fill
+                          className="object-cover rounded"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
+                        <span className="text-gray-500 text-xs">No image</span>
+                      </div>
+                    )}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap">${product.price}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{product.dimensions}</td>
