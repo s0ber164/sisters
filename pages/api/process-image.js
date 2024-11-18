@@ -1,7 +1,7 @@
-import { removeBackground, replaceBackground, enhanceImage } from '../../utils/photoroom';
 import formidable from 'formidable';
 import fs from 'fs/promises';
 import path from 'path';
+import { createHash } from 'crypto';
 
 export const config = {
   api: {
@@ -20,12 +20,11 @@ export default async function handler(req, res) {
   const uploadDir = path.join(process.cwd(), 'public', 'uploads');
   try {
     await fs.access(uploadDir);
-    console.log('Uploads directory exists:', uploadDir);
   } catch {
-    console.log('Creating uploads directory:', uploadDir);
     await fs.mkdir(uploadDir, { recursive: true });
   }
 
+  // Parse the incoming form data
   const form = formidable({
     uploadDir,
     keepExtensions: true,
@@ -33,67 +32,45 @@ export default async function handler(req, res) {
   });
 
   try {
-    console.log('Parsing form data...');
     const [fields, files] = await new Promise((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
-        if (err) {
-          console.error('Form parsing error:', err);
-          reject(err);
-          return;
-        }
+        if (err) reject(err);
         resolve([fields, files]);
       });
     });
 
-    console.log('Fields received:', fields);
-    console.log('Files received:', files);
-
-    if (!files || !files.image) {
-      console.error('No image file received');
-      return res.status(400).json({ message: 'No image file uploaded' });
+    const file = files.file;
+    if (!file) {
+      return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    const file = files.image;
-    console.log('Processing file:', file.filepath);
-
-    // Read the file into a buffer
-    const imageBuffer = await fs.readFile(file.filepath);
-    console.log('Image buffer size:', imageBuffer.length);
-
-    // Process the image
-    console.log('Sending to PhotoRoom API...');
-    const processedImageBuffer = await removeBackground(imageBuffer);
-    console.log('Received processed image, size:', processedImageBuffer.length);
-
-    // Generate unique filename for the processed image
-    const filename = `processed-${Date.now()}.png`;
-    const outputPath = path.join(uploadDir, filename);
-
-    // Save processed image
-    await fs.writeFile(outputPath, processedImageBuffer);
-    console.log('Processed image saved to:', outputPath);
-
-    // Clean up temporary file
-    await fs.unlink(file.filepath).catch(error => {
-      console.error('Error cleaning up temporary file:', error);
-    });
-
-    // Return the URL path relative to the public directory
-    const responseUrl = `/uploads/${filename}`;
-    console.log('Returning URL:', responseUrl);
+    // Generate MD5 hash of the file
+    const fileBuffer = await fs.readFile(file.filepath);
+    const hash = createHash('md5').update(fileBuffer).digest('hex');
     
-    res.status(200).json({
-      message: 'Image processed successfully',
-      url: responseUrl,
-    });
+    // Create a new filename with the hash
+    const ext = path.extname(file.originalFilename);
+    const newFilename = `${hash}${ext}`;
+    const newPath = path.join(uploadDir, newFilename);
+
+    // Check if file with this hash already exists
+    try {
+      await fs.access(newPath);
+      console.log('File already exists, using existing file');
+      // Delete the uploaded file since we'll use the existing one
+      await fs.unlink(file.filepath);
+    } catch {
+      // File doesn't exist, move the uploaded file to new location
+      await fs.rename(file.filepath, newPath);
+      console.log('File processed and saved:', newFilename);
+    }
+
+    // Return the URL for the processed image
+    const imageUrl = `/uploads/${newFilename}`;
+    res.status(200).json({ url: imageUrl });
+
   } catch (error) {
-    console.error('Error in process-image API route:', error);
-    
-    // Send a more detailed error response
-    res.status(500).json({
-      message: 'Error processing image',
-      error: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
-    });
+    console.error('Error processing image:', error);
+    res.status(500).json({ message: 'Error processing image', error: error.message });
   }
 }
