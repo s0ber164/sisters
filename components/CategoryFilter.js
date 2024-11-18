@@ -20,8 +20,8 @@ const CategoryFilter = ({ activeCategory, onCategoryChange }) => {
             onClick={() => onCategoryChange(category.id)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
               ${activeCategory === category.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-primary-600 text-white'
+                : 'bg-primary-100 text-primary-700 hover:bg-primary-200'
               }`}
           >
             {category.name}

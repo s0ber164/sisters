@@ -49,10 +49,10 @@ const ProductCard = ({ product }) => {
         
         {/* Product info section */}
         <div className="p-4 space-y-3">
-          <h3 className="text-lg font-semibold text-gray-800 truncate">{product.name}</h3>
+          <h3 className="text-lg font-semibold text-primary-800 truncate">{product.name}</h3>
           
           {/* Product details grid */}
-          <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
+          <div className="grid grid-cols-2 gap-2 text-sm text-primary-600">
             <div>
               <span className="font-medium">Quantity:</span>
               <span className="ml-1">{product.quantity}</span>
@@ -64,9 +64,9 @@ const ProductCard = ({ product }) => {
           </div>
 
           <div className="mt-2">
-            <p className="text-lg font-semibold text-gray-900">
+            <p className="text-lg font-semibold text-primary-900">
               ${typeof product.price === 'number' ? product.price.toFixed(2) : '0.00'}{' '}
-              <span className="text-sm font-normal text-gray-600">per week</span>
+              <span className="text-sm font-normal text-primary-600">per week</span>
             </p>
           </div>
 
@@ -74,8 +74,8 @@ const ProductCard = ({ product }) => {
           <button 
             className={`w-full mt-4 py-2 px-4 rounded-md transition-colors flex items-center justify-center space-x-2
               ${isSelected 
-                ? 'bg-green-600 hover:bg-green-700 text-white' 
-                : 'bg-blue-600 hover:bg-blue-700 text-white'
+                ? 'bg-primary-700 hover:bg-primary-800 text-white' 
+                : 'bg-primary-600 hover:bg-primary-700 text-white'
               }`}
             onClick={handleAddOrRemove}
           >

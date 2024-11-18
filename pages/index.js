@@ -33,7 +33,7 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-primary-50">
       <Head>
         <title>SIS Props - Product Catalog</title>
         <meta name="description" content="Browse our collection of props for film and theater" />
@@ -50,7 +50,7 @@ const Home = () => {
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setIsWishlistOpen(true)}
-                className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 bg-primary-100 rounded-lg hover:bg-primary-200 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
@@ -61,7 +61,7 @@ const Home = () => {
               </button>
               <a
                 href="/admin/products"
-                className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors"
+                className="bg-primary-800 text-white px-4 py-2 rounded hover:bg-primary-700 transition-colors"
               >
                 Manage Products
               </a>
@@ -71,13 +71,13 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative h-[500px] bg-gray-900">
+      <div className="relative h-[500px] bg-primary-900">
         <img
           src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
           alt="Vintage Furniture Collection"
           className="w-full h-full object-cover opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/50 to-transparent">
           <div className="container mx-auto px-4 h-full flex flex-col justify-center">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-2xl">
               Premium Props for Your Production
@@ -105,10 +105,10 @@ const Home = () => {
 
         {loading ? (
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="text-center text-gray-600 mt-8">
+          <div className="text-center text-primary-600 mt-8">
             <p>No products found matching your criteria.</p>
           </div>
         ) : (
