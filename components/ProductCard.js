@@ -17,6 +17,19 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  // Helper function to get the full image URL
+  const getImageUrl = (imageUrl) => {
+    if (!imageUrl) return "/placeholder-image.png";
+    if (imageUrl.startsWith('http')) return imageUrl;
+    // For local files (processed images), ensure they're served from the correct path
+    return imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
+  };
+
+  // Get the first valid image URL
+  const imageUrl = product.images && product.images.length > 0 
+    ? getImageUrl(product.images[0])
+    : "/placeholder-image.png";
+
   return (
     <>
       <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-sm">
@@ -26,7 +39,7 @@ const ProductCard = ({ product }) => {
           onClick={() => setShowModal(true)}
         >
           <Image
-            src={product.images?.[0] || "https://via.placeholder.com/400x400?text=No+Image"}
+            src={imageUrl}
             alt={product.name}
             fill
             className="object-cover"

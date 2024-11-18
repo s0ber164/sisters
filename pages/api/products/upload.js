@@ -2,9 +2,9 @@ import { IncomingForm } from 'formidable';
 import { promises as fs } from 'fs';
 import { parse } from 'csv-parse/sync';
 import { connectToDatabase } from '../../../utils/mongodb';
-import { removeBackground } from '../../../utils/photoroom';
-import fetch from 'node-fetch';
 import path from 'path';
+import { spawn } from 'child_process';
+import fetch from 'node-fetch';
 
 export const config = {
   api: {
@@ -14,13 +14,56 @@ export const config = {
 
 async function downloadImage(url) {
   try {
-    const response = await fetch(url);
+    // Clean the URL by removing any whitespace and quotes
+    const cleanUrl = url.trim().replace(/["']/g, '');
+    console.log('Downloading image from:', cleanUrl);
+    
+    const response = await fetch(cleanUrl);
     if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`);
     return Buffer.from(await response.arrayBuffer());
   } catch (error) {
     console.error('Error downloading image:', error);
     return null;
   }
+}
+
+async function processImageWithRembg(inputPath, outputDir) {
+  return new Promise((resolve, reject) => {
+    const outputFilename = `processed-${Date.now()}.png`;
+    const outputPath = path.join(outputDir, outputFilename);
+    
+    console.log('Processing image with Rembg:', inputPath);
+    console.log('Output path:', outputPath);
+
+    const pythonScript = path.join(process.cwd(), 'scripts', 'process_single_image.py');
+    const python = spawn('python', [
+      pythonScript,
+      inputPath,
+      outputPath
+    ]);
+
+    let stdoutData = '';
+    let stderrData = '';
+
+    python.stdout.on('data', (data) => {
+      stdoutData += data.toString();
+      console.log('Python stdout:', data.toString());
+    });
+
+    python.stderr.on('data', (data) => {
+      stderrData += data.toString();
+      console.error('Python stderr:', data.toString());
+    });
+
+    python.on('close', (code) => {
+      console.log(`Python process exited with code ${code}`);
+      if (code === 0) {
+        resolve(`/uploads/${outputFilename}`);
+      } else {
+        reject(new Error(`Python script failed with code ${code}: ${stderrData}`));
+      }
+    });
+  });
 }
 
 async function processProductImage(imageUrl, uploadDir) {
@@ -31,25 +74,32 @@ async function processProductImage(imageUrl, uploadDir) {
     const imageBuffer = await downloadImage(imageUrl);
     if (!imageBuffer) {
       console.error('Failed to download image:', imageUrl);
-      return imageUrl; // Return original URL if download fails
+      return null; // Return null instead of original URL if download fails
     }
 
-    // Process the image with PhotoRoom
-    console.log('Processing image with PhotoRoom (removing background and setting gray background)...');
-    const processedBuffer = await removeBackground(imageBuffer);
+    // Save the original image temporarily
+    const tempFilename = `temp-${Date.now()}${path.extname(imageUrl) || '.png'}`;
+    const tempFilePath = path.join(uploadDir, tempFilename);
+    await fs.writeFile(tempFilePath, imageBuffer);
 
-    // Generate unique filename
-    const filename = `processed-${Date.now()}${path.extname(imageUrl) || '.png'}`;
-    const filePath = path.join(uploadDir, filename);
-
-    // Save the processed image
-    await fs.writeFile(filePath, processedBuffer);
-    
-    // Return the public URL
-    return `/uploads/${filename}`;
+    try {
+      // Process the image with Rembg
+      console.log('Processing image with Rembg...');
+      const processedImageUrl = await processImageWithRembg(tempFilePath, uploadDir);
+      
+      // Delete the temporary file
+      await fs.unlink(tempFilePath).catch(console.error);
+      
+      return processedImageUrl;
+    } catch (error) {
+      console.error('Error processing image with Rembg:', error);
+      // Delete the temporary file
+      await fs.unlink(tempFilePath).catch(console.error);
+      return null; // Return null instead of original URL if processing fails
+    }
   } catch (error) {
     console.error('Error processing image:', error);
-    return imageUrl; // Return original URL if processing fails
+    return null; // Return null instead of original URL if processing fails
   }
 }
 
@@ -109,21 +159,32 @@ export default async function handler(req, res) {
     
     // Process each product's images
     const processedProducts = await Promise.all(records.map(async (record) => {
-      const images = record.images ? record.images.split(',').map(url => url.trim()) : [];
+      console.log('Processing record:', record);
+      
+      // Split image URLs by both spaces and commas, and clean them
+      const imageUrls = record.image_url
+        ? record.image_url
+            .split(/[\s,]+/)
+            .map(url => url.trim())
+            .filter(url => url.length > 0)
+        : [];
+      
+      console.log('Images to process:', imageUrls);
       
       // Process each image
       const processedImages = await Promise.all(
-        images.map(url => processProductImage(url, uploadDir))
+        imageUrls.map(url => processProductImage(url, uploadDir))
       );
+      
+      // Filter out failed images (null values)
+      const validImages = processedImages.filter(url => url !== null);
+      console.log('Processed images:', validImages);
 
       return {
         name: record.name || '',
         description: record.description || '',
         price: parseFloat(record.price) || 0,
-        quantity: parseInt(record.quantity) || 0,
-        dimensions: record.dimensions || '',
-        images: processedImages.filter(url => url), // Remove any failed URLs
-        category: record.category ? record.category.toLowerCase() : 'decor',
+        images: validImages,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -136,6 +197,7 @@ export default async function handler(req, res) {
 
     // Insert products
     const result = await db.collection('products').insertMany(processedProducts);
+    console.log('Inserted products:', result);
 
     // Return success response
     return res.status(200).json({ 

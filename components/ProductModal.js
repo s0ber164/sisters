@@ -1,7 +1,14 @@
 import React from 'react';
-import ImageCarousel from './ImageCarousel';
+import Image from 'next/image';
 
-const ProductModal = ({ product, onClose, onAdd, isSelected }) => {
+const ProductModal = ({ product, onClose, onAddOrRemove, isSelected }) => {
+  // Helper function to get the full image URL
+  const getImageUrl = (imageUrl) => {
+    if (!imageUrl) return "https://via.placeholder.com/800x800?text=No+Image";
+    if (imageUrl.startsWith('http')) return imageUrl;
+    return `${window.location.origin}${imageUrl}`;
+  };
+
   // Prevent clicks inside the modal from closing it
   const handleModalClick = (e) => {
     e.stopPropagation();
@@ -27,62 +34,48 @@ const ProductModal = ({ product, onClose, onAdd, isSelected }) => {
             </svg>
           </button>
 
-          <ImageCarousel images={product.images} />
-        </div>
-
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">{product.name}</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Details</h3>
-              <dl className="space-y-2">
-                <div>
-                  <dt className="font-medium text-gray-700">Price</dt>
-                  <dd className="text-gray-900">
-                    <div className="mt-4">
-                      <p className="text-2xl font-bold text-gray-900">
-                        ${typeof product.price === 'number' ? product.price.toFixed(2) : '0.00'}{' '}
-                        <span className="text-lg font-normal text-gray-600">per week</span>
-                      </p>
-                    </div>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-medium text-gray-700">Dimensions</dt>
-                  <dd className="text-gray-900">{product.dimensions || 'N/A'}</dd>
-                </div>
-                <div>
-                  <dt className="font-medium text-gray-700">Quantity Available</dt>
-                  <dd className="text-gray-900">{product.quantity}</dd>
-                </div>
-                <div>
-                  <dt className="font-medium text-gray-700">Category</dt>
-                  <dd className="text-gray-900 capitalize">{product.category || 'N/A'}</dd>
-                </div>
-              </dl>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {/* Image section */}
+            <div className="relative w-full pt-[100%]">
+              <Image
+                src={getImageUrl(product.images?.[0])}
+                alt={product.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-              <p className="text-gray-700">{product.description || 'No description available.'}</p>
-            </div>
-          </div>
 
-          <div className="flex justify-end pt-4 border-t">
-            <button
-              onClick={() => {
-                onAdd(product);
-                onClose();
-              }}
-              className={`px-6 py-2 rounded-md transition-colors
-                ${isSelected 
-                  ? 'bg-green-600 hover:bg-green-700 text-white' 
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+            {/* Product details section */}
+            <div className="p-6 space-y-4">
+              <h2 className="text-2xl font-bold text-gray-900">{product.name}</h2>
+              
+              <div className="space-y-2">
+                <p className="text-gray-600">
+                  <span className="font-medium">Quantity:</span> {product.quantity}
+                </p>
+                <p className="text-gray-600">
+                  <span className="font-medium">Dimensions:</span> {product.dimensions || 'N/A'}
+                </p>
+                {product.description && (
+                  <p className="text-gray-600">
+                    <span className="font-medium">Description:</span><br />
+                    {product.description}
+                  </p>
+                )}
+              </div>
+
+              <button
+                onClick={onAddOrRemove}
+                className={`mt-4 px-6 py-2 rounded-md font-medium transition-colors ${
+                  isSelected
+                    ? 'bg-red-500 text-white hover:bg-red-600'
+                    : 'bg-blue-500 text-white hover:bg-blue-600'
                 }`}
-            >
-              {isSelected ? 'Remove from List' : 'Add to List'}
-            </button>
+              >
+                {isSelected ? 'Remove from Selection' : 'Add to Selection'}
+              </button>
+            </div>
           </div>
         </div>
       </div>
