@@ -1,0 +1,4 @@
+name,description,price,quantity,dimensions,category,subcategories
+"Example Sofa","A beautiful modern sofa",599.99,1,"72"W x 36"D x 32"H","Furniture","Seating"
+"Table Lamp","Elegant table lamp with fabric shade",129.99,3,"12"W x 12"D x 24"H","Lighting","Table Lamps"
+"Decorative Pillow","Soft decorative pillow with pattern",49.99,5,"18"W x 18"H","Softs","Pillows"

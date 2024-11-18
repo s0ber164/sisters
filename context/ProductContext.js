@@ -102,9 +102,68 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const addProduct = (product) => {
-    if (!selectedProducts.find(p => p._id === product._id)) {
-      setSelectedProducts([...selectedProducts, product]);
+  const addProduct = async (productData) => {
+    try {
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to add product');
+      }
+
+      const newProduct = await response.json();
+      setProducts([...products, newProduct]);
+      return newProduct;
+    } catch (error) {
+      console.error('Error adding product:', error);
+      throw error;
+    }
+  };
+
+  const updateProduct = async (productId, productData) => {
+    try {
+      const response = await fetch(`/api/products/${productId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update product');
+      }
+
+      const updatedProduct = await response.json();
+      setProducts(products.map(p => p._id === productId ? updatedProduct : p));
+      return updatedProduct;
+    } catch (error) {
+      console.error('Error updating product:', error);
+      throw error;
+    }
+  };
+
+  const getProduct = async (productId) => {
+    try {
+      const response = await fetch(`/api/products/${productId}`);
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to fetch product');
+      }
+
+      const product = await response.json();
+      return product;
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      throw error;
     }
   };
 
@@ -144,6 +203,8 @@ export const ProductProvider = ({ children }) => {
     addProduct,
     removeProduct,
     deleteProduct,
+    updateProduct,
+    getProduct
   };
 
   return (

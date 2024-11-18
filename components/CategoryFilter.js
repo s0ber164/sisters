@@ -1,25 +1,22 @@
 import React from 'react';
-
-const categories = [
-  { id: 'all', name: 'All' },
-  { id: 'softs', name: 'Softs' },
-  { id: 'lighting', name: 'Lighting' },
-  { id: 'decor', name: 'Decor' },
-  { id: 'furniture', name: 'Furniture' },
-  { id: 'tables', name: 'Tables' },
-  { id: 'rugs', name: 'Rugs' }
-];
+import { useCategories } from '../context/CategoryContext';
 
 const CategoryFilter = ({ activeCategory, onCategoryChange }) => {
+  const { categories } = useCategories();
+  const mainCategories = [
+    { id: 'all', name: 'All' },
+    ...(categories?.filter(cat => !cat.parent) || [])
+  ];
+
   return (
     <div className="mb-8">
       <div className="flex flex-wrap gap-2">
-        {categories.map((category) => (
+        {mainCategories.map((category) => (
           <button
-            key={category.id}
-            onClick={() => onCategoryChange(category.id)}
+            key={category.id || category._id}
+            onClick={() => onCategoryChange(category.id || category._id)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
-              ${activeCategory === category.id
+              ${activeCategory === (category.id || category._id)
                 ? 'bg-primary-600 text-white'
                 : 'bg-primary-100 text-primary-700 hover:bg-primary-200'
               }`}

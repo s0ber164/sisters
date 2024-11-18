@@ -1,17 +1,13 @@
 import { IncomingForm } from 'formidable';
 import { promises as fs } from 'fs';
 import { parse } from 'csv-parse/sync';
-import { connectToDatabase } from '../../../utils/mongodb';
+import dbConnect from '../../../utils/dbConnect';
+import Product from '../../../models/Product';
+import Category from '../../../models/Category';
 import path from 'path';
 import { spawn } from 'child_process';
 import fetch from 'node-fetch';
 import crypto from 'crypto';
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 async function downloadImage(url) {
   try {
@@ -144,6 +140,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    await dbConnect();
+    
     const uploadDir = path.join(process.cwd(), 'public', 'uploads');
     await fs.mkdir(uploadDir, { recursive: true });
 
@@ -183,10 +181,14 @@ export default async function handler(req, res) {
       trim: true
     });
 
-    // Connect to database
-    const { db } = await connectToDatabase();
+    // Get all categories for reference
+    const categories = await Category.find({});
+    const categoryMap = new Map();
+    categories.forEach(cat => {
+      categoryMap.set(cat.name.toLowerCase(), cat._id);
+    });
     
-    // Process each product's images
+    // Process each product's images and categories
     const processedProducts = await Promise.all(records.map(async (record) => {
       console.log('Processing record:', record);
       
@@ -216,11 +218,55 @@ export default async function handler(req, res) {
       const validImages = processedImages.filter(url => url !== null);
       console.log('Processed images:', validImages);
 
+      // Find category and subcategories
+      let categoryId = null;
+      let subcategoryIds = [];
+
+      if (record.category) {
+        const categoryName = record.category.trim().toLowerCase();
+        categoryId = categoryMap.get(categoryName);
+        
+        if (!categoryId) {
+          // Create new category if it doesn't exist
+          const newCategory = await Category.create({ name: record.category.trim() });
+          categoryId = newCategory._id;
+          categoryMap.set(categoryName, categoryId);
+        }
+      }
+
+      if (record.subcategories) {
+        const subcategoryNames = record.subcategories
+          .split(',')
+          .map(s => s.trim())
+          .filter(s => s);
+
+        for (const subName of subcategoryNames) {
+          const subNameLower = subName.toLowerCase();
+          let subId = categoryMap.get(subNameLower);
+
+          if (!subId) {
+            // Create new subcategory if it doesn't exist
+            const newSub = await Category.create({
+              name: subName,
+              parent: categoryId
+            });
+            subId = newSub._id;
+            categoryMap.set(subNameLower, subId);
+          }
+
+          subcategoryIds.push(subId);
+        }
+      }
+
       return {
         name: record.name || '',
         description: record.description || '',
         price: parseFloat(record.price) || 0,
+        quantity: parseInt(record.quantity) || 1,
+        dimensions: record.dimensions || '',
         images: validImages,
+        category: categoryId,
+        subcategories: subcategoryIds,
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -231,14 +277,14 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'No valid products found in CSV' });
     }
 
-    // Insert products
-    const result = await db.collection('products').insertMany(processedProducts);
-    console.log('Inserted products:', result);
+    // Insert products using Mongoose
+    const result = await Product.insertMany(processedProducts);
+    console.log('Inserted products:', result.length);
 
     // Return success response
     return res.status(200).json({ 
       message: 'Products uploaded successfully',
-      count: result.insertedCount 
+      count: result.length
     });
   } catch (error) {
     console.error('Upload error:', error);

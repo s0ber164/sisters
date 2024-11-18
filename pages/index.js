@@ -16,8 +16,9 @@ const Home = () => {
     if (products) {
       const filtered = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.dimensions.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = activeCategory === 'all' || product.category?.toLowerCase() === activeCategory;
+          (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          (product.dimensions && product.dimensions.toLowerCase().includes(searchQuery.toLowerCase()));
+        const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
         return matchesSearch && matchesCategory;
       });
       setFilteredProducts(filtered);

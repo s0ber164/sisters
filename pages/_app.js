@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import { ProductProvider } from '../context/ProductContext';
+import { CategoryProvider } from '../context/CategoryContext';
 import { Libre_Baskerville } from 'next/font/google';
 
 const libreBaskerville = Libre_Baskerville({
@@ -10,9 +11,11 @@ const libreBaskerville = Libre_Baskerville({
 function MyApp({ Component, pageProps }) {
   return (
     <ProductProvider>
-      <main className={libreBaskerville.className}>
-        <Component {...pageProps} />
-      </main>
+      <CategoryProvider>
+        <main className={libreBaskerville.className}>
+          <Component {...pageProps} />
+        </main>
+      </CategoryProvider>
     </ProductProvider>
   );
 }

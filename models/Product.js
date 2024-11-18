@@ -19,9 +19,36 @@ const ProductSchema = new mongoose.Schema({
   images: {
     type: [String],
     default: [],
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: [true, 'Please provide a category'],
+  },
+  subcategories: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
+  }],
+  quantity: {
+    type: Number,
+    default: 1,
+    min: 0,
+  },
+  dimensions: {
+    type: String,
+    trim: true,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
   }
 }, {
   timestamps: true
 });
+
+// Add indexes for better query performance
+ProductSchema.index({ category: 1 });
+ProductSchema.index({ subcategories: 1 });
+ProductSchema.index({ name: 'text', description: 'text' });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
