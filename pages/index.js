@@ -18,7 +18,11 @@ const Home = () => {
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
           (product.dimensions && product.dimensions.toLowerCase().includes(searchQuery.toLowerCase()));
-        const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
+        
+        const matchesCategory = activeCategory === 'all' || 
+          product.category === activeCategory || 
+          (product.subcategories && product.subcategories.includes(activeCategory));
+        
         return matchesSearch && matchesCategory;
       });
       setFilteredProducts(filtered);
