@@ -18,10 +18,10 @@ export default async function handler(req, res) {
             .toArray();
           
           console.log('Products fetched:', products.length);
-          res.status(200).json(products);
+          return res.status(200).json(products || []);
         } catch (error) {
           console.error('Error fetching products:', error);
-          res.status(500).json({ 
+          return res.status(500).json({ 
             error: 'Failed to fetch products',
             details: error.message 
           });
@@ -52,14 +52,14 @@ export default async function handler(req, res) {
           console.log('Processing products:', products.length);
           const result = await db.collection('products').insertMany(products);
           console.log('Products created:', result.insertedCount);
-          res.status(201).json({ 
+          return res.status(201).json({ 
             message: 'Products created successfully',
             count: result.insertedCount,
             products: result.ops
           });
         } catch (error) {
           console.error('Error creating products:', error);
-          res.status(400).json({ 
+          return res.status(400).json({ 
             error: 'Failed to create products',
             details: error.message 
           });
@@ -67,10 +67,10 @@ export default async function handler(req, res) {
         break;
 
       default:
-        res.status(405).json({ error: 'Method not allowed' });
+        return res.status(405).json({ error: 'Method not allowed' });
     }
   } catch (error) {
     console.error('Server error:', error);
-    res.status(500).json({ error: 'Internal server error', details: error.message });
+    return res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 }

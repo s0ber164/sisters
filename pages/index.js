@@ -59,12 +59,6 @@ const Home = () => {
                 </svg>
                 <span className="font-medium">Wishlist ({selectedProducts.length})</span>
               </button>
-              <a
-                href="/admin/products"
-                className="bg-primary-800 text-white px-4 py-2 rounded hover:bg-primary-700 transition-colors"
-              >
-                Manage Products
-              </a>
             </div>
           </div>
         </div>
@@ -73,8 +67,8 @@ const Home = () => {
       {/* Hero Section */}
       <div className="relative h-[500px] bg-primary-900">
         <img
-          src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-          alt="Vintage Furniture Collection"
+          src="/C5D1A4EF-80F3-466B-BE7C-15A9A62FCBDC_1_105_c.JPEG"
+          alt="SIS Props Hero Image"
           className="w-full h-full object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary-900/50 to-transparent">

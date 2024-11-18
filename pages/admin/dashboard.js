@@ -35,12 +35,6 @@ export default function AdminDashboard() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <a
-                href="/admin/products"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                Manage Products
-              </a>
               <button
                 onClick={handleLogout}
                 disabled={isLoading}
@@ -58,6 +52,20 @@ export default function AdminDashboard() {
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Upload Products</h2>
             <ProductUploader />
+            <div className="mt-6 border-t pt-6">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-medium">Product Management</h3>
+                  <p className="text-sm text-gray-500">View, edit, or delete your existing products</p>
+                </div>
+                <a
+                  href="/admin/products"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Manage Products
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </main>

@@ -89,7 +89,7 @@ const ProductCard = ({ product }) => {
         <ProductModal
           product={product}
           onClose={() => setShowModal(false)}
-          onAdd={handleAddOrRemove}
+          onAddOrRemove={handleAddOrRemove}
           isSelected={isSelected}
         />
       )}

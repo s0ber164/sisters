@@ -11,12 +11,14 @@ export const ProductProvider = ({ children }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Load products from API on initial mount
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         console.log('Fetching products from API...');
         const response = await fetch('/api/products');
         console.log('API Response status:', response.status);
@@ -33,6 +35,8 @@ export const ProductProvider = ({ children }) => {
       } catch (error) {
         console.error('Error fetching products:', error);
         setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -132,6 +136,7 @@ export const ProductProvider = ({ children }) => {
     products: filteredProducts,
     selectedProducts,
     isProcessing,
+    loading,
     error,
     searchQuery,
     setSearchQuery,
