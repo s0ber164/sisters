@@ -5,6 +5,7 @@ import { connectToDatabase } from '../../../utils/mongodb';
 import path from 'path';
 import { spawn } from 'child_process';
 import fetch from 'node-fetch';
+import crypto from 'crypto';
 
 export const config = {
   api: {
@@ -19,17 +20,27 @@ async function downloadImage(url) {
     console.log('Downloading image from:', cleanUrl);
     
     const response = await fetch(cleanUrl);
-    if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`);
+    if (!response.ok) {
+      console.log(`Failed to fetch image from ${cleanUrl}, using placeholder`);
+      return null;
+    }
     return Buffer.from(await response.arrayBuffer());
   } catch (error) {
-    console.error('Error downloading image:', error);
+    console.log(`Error downloading image from ${url}, using placeholder:`, error.message);
     return null;
   }
 }
 
+async function getUniqueFilename(imageUrl) {
+  // Create a hash of the URL to use as the filename
+  const hash = crypto.createHash('md5').update(imageUrl).digest('hex');
+  return `image-${hash}.png`;
+}
+
 async function processImageWithRembg(inputPath, outputDir) {
   return new Promise((resolve, reject) => {
-    const outputFilename = `processed-${Date.now()}.png`;
+    const inputFilename = path.basename(inputPath);
+    const outputFilename = `processed-${inputFilename}`;
     const outputPath = path.join(outputDir, outputFilename);
     
     console.log('Processing image with Rembg:', inputPath);
@@ -68,38 +79,60 @@ async function processImageWithRembg(inputPath, outputDir) {
 
 async function processProductImage(imageUrl, uploadDir) {
   try {
-    console.log('Processing image:', imageUrl);
-    
-    // Download the image
+    // If no image URL provided, return placeholder
+    if (!imageUrl) {
+      return 'https://via.placeholder.com/400x400?text=No+Image';
+    }
+
     const imageBuffer = await downloadImage(imageUrl);
+    
+    // If download failed, return placeholder
     if (!imageBuffer) {
-      console.error('Failed to download image:', imageUrl);
-      return null; // Return null instead of original URL if download fails
+      return 'https://via.placeholder.com/400x400?text=Image+Not+Found';
     }
 
-    // Save the original image temporarily
-    const tempFilename = `temp-${Date.now()}${path.extname(imageUrl) || '.png'}`;
-    const tempFilePath = path.join(uploadDir, tempFilename);
-    await fs.writeFile(tempFilePath, imageBuffer);
+    // Create uploads directory if it doesn't exist
+    await fs.mkdir(uploadDir, { recursive: true });
 
+    // Generate consistent filename based on URL
+    const filename = await getUniqueFilename(imageUrl);
+    const filepath = path.join(uploadDir, filename);
+    
+    // Check if file already exists
     try {
-      // Process the image with Rembg
-      console.log('Processing image with Rembg...');
-      const processedImageUrl = await processImageWithRembg(tempFilePath, uploadDir);
-      
-      // Delete the temporary file
-      await fs.unlink(tempFilePath).catch(console.error);
-      
-      return processedImageUrl;
-    } catch (error) {
-      console.error('Error processing image with Rembg:', error);
-      // Delete the temporary file
-      await fs.unlink(tempFilePath).catch(console.error);
-      return null; // Return null instead of original URL if processing fails
+      await fs.access(filepath);
+      console.log('Image already exists:', filepath);
+      return `/uploads/${filename}`;
+    } catch {
+      // File doesn't exist, proceed with download and processing
+      await fs.writeFile(filepath, imageBuffer);
     }
+
+    // If background removal is requested and the script exists, process with rembg
+    try {
+      const processedFilename = `processed-${filename}`;
+      const processedPath = path.join(uploadDir, processedFilename);
+      
+      // Check if processed file already exists
+      try {
+        await fs.access(processedPath);
+        console.log('Processed image already exists:', processedPath);
+        return `/uploads/${processedFilename}`;
+      } catch {
+        // Process the image if it doesn't exist
+        const result = await processImageWithRembg(filepath, uploadDir);
+        if (result) {
+          return result.replace(/\\/g, '/');
+        }
+      }
+    } catch (error) {
+      console.error('Background removal failed, using original image:', error);
+    }
+
+    return `/uploads/${filename}`;
   } catch (error) {
-    console.error('Error processing image:', error);
-    return null; // Return null instead of original URL if processing fails
+    console.error('Error processing product image:', error);
+    return 'https://via.placeholder.com/400x400?text=Processing+Error';
   }
 }
 
@@ -110,24 +143,16 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  // Create uploads directory if it doesn't exist
-  const uploadDir = path.join(process.cwd(), 'public', 'uploads');
   try {
-    await fs.access(uploadDir);
-    console.log('Uploads directory exists:', uploadDir);
-  } catch {
-    console.log('Creating uploads directory:', uploadDir);
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
     await fs.mkdir(uploadDir, { recursive: true });
-  }
 
-  const form = new IncomingForm({
-    uploadDir,
-    keepExtensions: true,
-    maxFileSize: 10 * 1024 * 1024, // 10MB
-  });
+    const form = new IncomingForm({
+      uploadDir,
+      keepExtensions: true,
+      maxFileSize: 10 * 1024 * 1024, // 10MB
+    });
 
-  try {
-    console.log('Parsing form data...');
     const [fields, files] = await new Promise((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
         if (err) {
@@ -142,6 +167,10 @@ export default async function handler(req, res) {
     if (!files.file || !files.file[0]) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
+
+    // Get useRembg preference
+    const useRembg = fields.useRembg ? fields.useRembg[0] === 'true' : true;
+    console.log('Use Rembg:', useRembg);
 
     // Read file content
     const file = files.file[0];
@@ -173,7 +202,14 @@ export default async function handler(req, res) {
       
       // Process each image
       const processedImages = await Promise.all(
-        imageUrls.map(url => processProductImage(url, uploadDir))
+        imageUrls.map(async (url) => {
+          if (useRembg) {
+            return processProductImage(url, uploadDir);
+          } else {
+            // If not using rembg, just return the original URL
+            return url;
+          }
+        })
       );
       
       // Filter out failed images (null values)
@@ -204,7 +240,6 @@ export default async function handler(req, res) {
       message: 'Products uploaded successfully',
       count: result.insertedCount 
     });
-
   } catch (error) {
     console.error('Upload error:', error);
     return res.status(500).json({ 

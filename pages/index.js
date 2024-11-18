@@ -4,8 +4,6 @@ import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
 import CategoryFilter from '../components/CategoryFilter';
 import WishlistSidebar from '../components/WishlistSidebar';
-import ImageProcessor from '../components/ImageProcessor';
-import BatchProcessor from '../components/BatchProcessor';
 import { useProducts } from '../context/ProductContext';
 
 const Home = () => {
@@ -13,8 +11,6 @@ const Home = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
-  const [isImageProcessorOpen, setIsImageProcessorOpen] = useState(false);
-  const [isBatchProcessorOpen, setIsBatchProcessorOpen] = useState(false);
 
   useEffect(() => {
     if (products) {
@@ -100,20 +96,6 @@ const Home = () => {
           <h2 className="text-3xl font-bold text-primary-900">
             Available Props
           </h2>
-          <div className="flex space-x-4">
-            <button
-              className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              onClick={() => setIsImageProcessorOpen(true)}
-            >
-              Process Single Image
-            </button>
-            <button
-              className="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-secondary-500"
-              onClick={() => setIsBatchProcessorOpen(true)}
-            >
-              Process Batch (CSV)
-            </button>
-          </div>
         </div>
         
         <CategoryFilter 
@@ -139,54 +121,6 @@ const Home = () => {
           </div>
         )}
       </main>
-
-      {/* Image Processing Modal */}
-      {isImageProcessorOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg max-w-lg w-full mx-4">
-            <div className="flex justify-end p-2">
-              <button
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => setIsImageProcessorOpen(false)}
-              >
-                <span className="sr-only">Close</span>
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <ImageProcessor
-              onImageProcessed={(url) => {
-                setIsImageProcessorOpen(false);
-              }}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Batch Processing Modal */}
-      {isBatchProcessorOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg max-w-lg w-full mx-4">
-            <div className="flex justify-end p-2">
-              <button
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => setIsBatchProcessorOpen(false)}
-              >
-                <span className="sr-only">Close</span>
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <BatchProcessor
-              onBatchProcessed={(result) => {
-                setIsBatchProcessorOpen(false);
-              }}
-            />
-          </div>
-        </div>
-      )}
 
       {/* Wishlist Sidebar */}
       <WishlistSidebar 

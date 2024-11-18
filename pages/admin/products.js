@@ -14,6 +14,8 @@ const AdminProducts = () => {
     images: []
   });
   const [newImageUrl, setNewImageUrl] = useState('');
+  const [exportLoading, setExportLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleEdit = (product) => {
     setSelectedProduct(product);
@@ -93,16 +95,94 @@ const AdminProducts = () => {
     }));
   };
 
+  const handleExport = async () => {
+    try {
+      setExportLoading(true);
+      const response = await fetch('/api/products/export');
+      if (!response.ok) {
+        throw new Error('Export failed');
+      }
+      
+      // Get the CSV content
+      const blob = await response.blob();
+      
+      // Create a download link and trigger it
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'products.csv';
+      
+      document.body.appendChild(a);
+      a.click();
+      
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Export error:', error);
+      alert('Failed to export products');
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!window.confirm('⚠️ WARNING: This will permanently delete ALL products. Are you absolutely sure?')) {
+      return;
+    }
+    
+    if (!window.confirm('⚠️ FINAL WARNING: This action CANNOT be undone. Do you really want to delete ALL products?')) {
+      return;
+    }
+
+    try {
+      setDeleteLoading(true);
+      const response = await fetch('/api/products/delete-all', {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete products');
+      }
+
+      const result = await response.json();
+      alert(`Successfully deleted ${result.deletedCount} products`);
+      window.location.reload();
+    } catch (error) {
+      console.error('Error deleting all products:', error);
+      alert('Failed to delete products');
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Product Management</h1>
-        <a 
-          href="/"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Back to Home
-        </a>
+        <h1 className="text-3xl font-bold">Manage Products</h1>
+        <div className="flex gap-4">
+          <button
+            onClick={handleExport}
+            disabled={exportLoading}
+            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {exportLoading ? 'Exporting...' : 'Export Products'}
+          </button>
+          <button
+            onClick={handleDeleteAll}
+            disabled={deleteLoading}
+            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {deleteLoading ? 'Deleting...' : 'Delete All Products'}
+          </button>
+          <a 
+            href="/"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Back to Home
+          </a>
+        </div>
       </div>
 
       {editMode ? (

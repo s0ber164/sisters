@@ -6,6 +6,7 @@ export function ProductUploader() {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState('');
   const [progress, setProgress] = useState('');
+  const [useRembg, setUseRembg] = useState(true);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -33,19 +34,31 @@ export function ProductUploader() {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('useRembg', useRembg);
 
       const response = await fetch('/api/products/upload', {
         method: 'POST',
         body: formData,
+      }).catch(error => {
+        console.error('Network error:', error);
+        throw new Error(`Network error: ${error.message}`);
       });
 
-      const data = await response.json();
+      if (!response) {
+        throw new Error('No response received from server');
+      }
+
+      console.log('Response status:', response.status);
+      const data = await response.json().catch(error => {
+        console.error('JSON parse error:', error);
+        throw new Error('Failed to parse server response');
+      });
 
       if (!response.ok) {
         throw new Error(data.error || 'Error uploading products');
       }
 
-      setMessage(`Successfully processed ${data.count} products with their images!`);
+      setMessage(`Successfully processed ${data.count} products${useRembg ? ' with background removal' : ''}!`);
       setProgress('');
       setFile(null);
       // Reset file input
@@ -81,11 +94,25 @@ export function ProductUploader() {
             disabled={isUploading}
           />
           <p className="mt-1 text-sm text-gray-500">
-            Upload a CSV file with product details including image URLs. All product images will automatically have backgrounds removed.
+            Upload a CSV file with product details including image URLs.
           </p>
           <p className="mt-1 text-sm text-gray-500">
             Required CSV columns: name, description, price, image_url (can contain multiple URLs separated by commas)
           </p>
+        </div>
+
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="useRembg"
+            checked={useRembg}
+            onChange={(e) => setUseRembg(e.target.checked)}
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            disabled={isUploading}
+          />
+          <label htmlFor="useRembg" className="ml-2 block text-sm text-gray-900">
+            Remove image backgrounds using Rembg
+          </label>
         </div>
 
         {error && (
