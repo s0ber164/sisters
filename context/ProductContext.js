@@ -28,7 +28,11 @@ export const ProductProvider = ({ children }) => {
           throw new Error(errorData.error || 'Failed to fetch products');
         }
         
-        const data = await response.json();
+        const { success, data } = await response.json();
+        if (!success) {
+          throw new Error('Failed to fetch products');
+        }
+        
         console.log('Products fetched successfully:', data.length);
         setProducts(data);
         setError(null);
@@ -89,7 +93,10 @@ export const ProductProvider = ({ children }) => {
       if (!productsResponse.ok) {
         throw new Error('Failed to fetch updated products');
       }
-      const updatedProducts = await productsResponse.json();
+      const { success, data: updatedProducts } = await productsResponse.json();
+      if (!success) {
+        throw new Error('Failed to fetch updated products');
+      }
       setProducts(updatedProducts);
       setError(null);
       return result;
@@ -102,27 +109,30 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-  const addProduct = async (productData) => {
+  const addProduct = (product) => {
     try {
-      const response = await fetch('/api/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(productData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to add product');
+      // Check if product is already in the list
+      if (selectedProducts.some(p => p._id === product._id)) {
+        console.log('Product already in list:', product.name);
+        return;
       }
-
-      const newProduct = await response.json();
-      setProducts([...products, newProduct]);
-      return newProduct;
+      
+      // Add to selected products
+      setSelectedProducts([...selectedProducts, product]);
+      console.log('Added product to list:', product.name);
     } catch (error) {
-      console.error('Error adding product:', error);
-      throw error;
+      console.error('Error adding product to list:', error);
+      throw new Error('Failed to add product to list');
+    }
+  };
+
+  const removeProduct = (product) => {
+    try {
+      setSelectedProducts(selectedProducts.filter(p => p._id !== product._id));
+      console.log('Removed product from list:', product.name);
+    } catch (error) {
+      console.error('Error removing product from list:', error);
+      throw new Error('Failed to remove product from list');
     }
   };
 
@@ -165,10 +175,6 @@ export const ProductProvider = ({ children }) => {
       console.error('Error fetching product:', error);
       throw error;
     }
-  };
-
-  const removeProduct = (product) => {
-    setSelectedProducts(selectedProducts.filter(p => p._id !== product._id));
   };
 
   const deleteProduct = async (productId) => {
