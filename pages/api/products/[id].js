@@ -17,16 +17,20 @@ export default async function handler(req, res) {
 
           if (!product) {
             return res.status(404).json({ 
+              success: false, 
               error: 'Product not found' 
             });
           }
 
-          return res.status(200).json(product);
+          return res.status(200).json({ 
+            success: true, 
+            data: product 
+          });
         } catch (error) {
           console.error('Error fetching product:', error);
           return res.status(500).json({ 
-            error: 'Failed to fetch product',
-            details: error.message 
+            success: false, 
+            error: 'Error fetching product' 
           });
         }
 

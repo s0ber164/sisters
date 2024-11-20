@@ -19,9 +19,13 @@ const Home = () => {
           (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
           (product.dimensions && product.dimensions.toLowerCase().includes(searchQuery.toLowerCase()));
         
-        const matchesCategory = activeCategory === 'all' || 
-          product.category === activeCategory || 
-          (product.subcategories && product.subcategories.includes(activeCategory));
+        const matchesCategory = 
+          activeCategory === 'all' || 
+          product.category?._id === activeCategory || 
+          product.category === activeCategory ||
+          (product.subcategories && product.subcategories.some(sub => 
+            sub._id === activeCategory || sub === activeCategory
+          ));
         
         return matchesSearch && matchesCategory;
       });
