@@ -6,7 +6,7 @@ import SearchBar from '../../components/SearchBar';
 import { Box, Typography, Button, Card, CardContent, CardActions, Grid, Paper } from '@mui/material';
 
 const AdminProducts = () => {
-  const { products, filteredProducts } = useProducts();
+  const { products, loading, error } = useProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
@@ -19,6 +19,31 @@ const AdminProducts = () => {
   const [newImageUrl, setNewImageUrl] = useState('');
   const [exportLoading, setExportLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h4" gutterBottom>
+            Loading products...
+          </Typography>
+        </Box>
+      </AdminLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <AdminLayout>
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h4" gutterBottom color="error">
+            Error loading products
+          </Typography>
+          <Typography color="error">{error}</Typography>
+        </Box>
+      </AdminLayout>
+    );
+  }
 
   const handleEdit = (product) => {
     setSelectedProduct(product);
@@ -307,7 +332,7 @@ const AdminProducts = () => {
           </div>
         ) : (
           <Grid container spacing={3}>
-            {filteredProducts.map((product) => (
+            {products.map((product) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
                 <Card>
                   <Box sx={{ position: 'relative', pt: '100%' }}>

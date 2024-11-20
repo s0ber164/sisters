@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     if (products) {
-      const filtered = products.filter(product => {
+      const filtered = Array.isArray(products) ? products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
           (product.dimensions && product.dimensions.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -28,7 +28,7 @@ const Home = () => {
           ));
         
         return matchesSearch && matchesCategory;
-      });
+      }) : [];
       setFilteredProducts(filtered);
     }
   }, [products, searchQuery, activeCategory]);
@@ -37,8 +37,26 @@ const Home = () => {
     setActiveCategory(categoryId);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-primary-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
+          <p className="mt-4 text-primary-600">Loading products...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (error) {
-    return <div className="text-center text-red-600 mt-8">Error loading products: {error}</div>;
+    return (
+      <div className="min-h-screen bg-primary-50 flex items-center justify-center">
+        <div className="text-center text-red-600 p-4 rounded-lg bg-white shadow-lg">
+          <h2 className="text-xl font-bold mb-2">Error</h2>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -111,11 +129,7 @@ const Home = () => {
           </div>
         </div>
         
-        {loading ? (
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-          </div>
-        ) : filteredProducts.length === 0 ? (
+        {filteredProducts.length === 0 ? (
           <div className="text-center text-primary-600 mt-8">
             <p>No products found matching your criteria.</p>
           </div>
