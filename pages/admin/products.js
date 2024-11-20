@@ -85,16 +85,19 @@ const AdminProducts = () => {
         },
         body: JSON.stringify(formData),
       });
+
+      const data = await response.json();
+      
       if (response.ok) {
         setEditMode(false);
         setSelectedProduct(null);
         window.location.reload();
       } else {
-        alert('Failed to update product');
+        alert(data.error || 'Failed to update product');
       }
     } catch (error) {
       console.error('Error updating product:', error);
-      alert('Error updating product');
+      alert('Error updating product: ' + error.message);
     }
   };
 

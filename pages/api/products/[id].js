@@ -38,34 +38,45 @@ export default async function handler(req, res) {
         try {
           const productData = req.body;
           
-          // Validate required fields
-          if (!productData.name) throw new Error('Product name is required');
-          if (!productData.description) throw new Error('Product description is required');
-          if (!productData.price) throw new Error('Product price is required');
-          if (!productData.category) throw new Error('Product category is required');
+          // Only validate name and price
+          if (!productData.name) {
+            return res.status(400).json({
+              success: false,
+              error: 'Product name is required'
+            });
+          }
+          if (productData.price === undefined || productData.price === '') {
+            return res.status(400).json({
+              success: false,
+              error: 'Product price is required'
+            });
+          }
 
           const product = await Product.findByIdAndUpdate(
             id,
             productData,
             { 
               new: true,
-              runValidators: true 
+              runValidators: true
             }
-          ).populate('category')
-           .populate('subcategories');
+          );
 
           if (!product) {
             return res.status(404).json({ 
+              success: false, 
               error: 'Product not found' 
             });
           }
 
-          return res.status(200).json(product);
+          return res.status(200).json({ 
+            success: true, 
+            data: product 
+          });
         } catch (error) {
           console.error('Error updating product:', error);
           return res.status(400).json({ 
-            error: 'Failed to update product',
-            details: error.message 
+            success: false, 
+            error: error.message || 'Error updating product' 
           });
         }
 
