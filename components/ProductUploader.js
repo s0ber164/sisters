@@ -34,7 +34,7 @@ export function ProductUploader() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('useRembg', useRembg);
+      formData.append('useRembg', useRembg.toString());  
 
       const response = await fetch('/api/products/upload', {
         method: 'POST',

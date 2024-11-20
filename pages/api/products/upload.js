@@ -65,9 +65,14 @@ export default async function handler(req, res) {
           reject(err);
           return;
         }
-        console.log('Form parse complete. Fields:', fields);
+        // Convert fields into a proper object since formidable returns a weird format
+        const processedFields = {};
+        Object.keys(fields).forEach(key => {
+          processedFields[key] = fields[key][0];
+        });
+        console.log('Form parse complete. Fields:', processedFields);
         console.log('Files:', Object.keys(files));
-        resolve([fields, files]);
+        resolve([processedFields, files]);
       });
     });
 
