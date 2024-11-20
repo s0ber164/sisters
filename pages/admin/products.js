@@ -1,24 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useProducts } from '../../context/ProductContext';
 import Image from 'next/image';
 import AdminLayout from '../../components/AdminLayout';
 import SearchBar from '../../components/SearchBar';
-import { Box, Typography, Button, Card, CardContent, CardActions, Grid, Paper } from '@mui/material';
+import { 
+  Box, 
+  Typography, 
+  Button, 
+  Card, 
+  CardContent, 
+  CardActions, 
+  Grid, 
+  Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider
+} from '@mui/material';
 
 const AdminProducts = () => {
   const { products, loading, error } = useProducts();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     price: '',
     dimensions: '',
     quantity: '',
-    images: []
+    images: [],
+    category: '',
+    subcategories: []
   });
   const [newImageUrl, setNewImageUrl] = useState('');
   const [exportLoading, setExportLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+
+  // Get available subcategories based on selected category
+  const availableSubcategories = useMemo(() => {
+    const selectedCategory = categories.find(cat => cat._id === formData.category);
+    return selectedCategory?.subcategories || [];
+  }, [categories, formData.category]);
+
+  // Fetch categories when component mounts
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('/api/categories');
+        const data = await response.json();
+        if (data.success) {
+          setCategories(data.data);
+        } else {
+          console.error('Failed to fetch categories:', data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  // Reset subcategories when category changes
+  useEffect(() => {
+    if (!formData.category) {
+      setFormData(prev => ({ ...prev, subcategories: [] }));
+    }
+  }, [formData.category]);
 
   if (loading) {
     return (
@@ -52,7 +101,9 @@ const AdminProducts = () => {
       price: product.price,
       dimensions: product.dimensions,
       quantity: product.quantity,
-      images: product.images || []
+      images: product.images || [],
+      category: product.category?._id || product.category || '',
+      subcategories: product.subcategories?.map(sub => sub._id) || product.subcategories || []
     });
     setEditMode(true);
   };
@@ -103,10 +154,25 @@ const AdminProducts = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === 'price' || name === 'quantity' ? Number(value) : value
-    }));
+    if (name === 'category') {
+      // Reset subcategories when category changes
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        subcategories: []
+      }));
+    } else if (name === 'subcategories') {
+      // Handle multiple subcategory selection
+      setFormData(prev => ({
+        ...prev,
+        [name]: Array.isArray(value) ? value : [value]
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: name === 'price' || name === 'quantity' ? Number(value) : value
+      }));
+    }
   };
 
   const handleAddImage = () => {
@@ -268,6 +334,48 @@ const AdminProducts = () => {
                 />
               </div>
               <div>
+                <label className="block text-sm font-medium text-gray-700">Category</label>
+                <FormControl sx={{ width: '100%', mb: 2 }}>
+                  <InputLabel id="category-label">Select a category</InputLabel>
+                  <Select
+                    labelId="category-label"
+                    id="category"
+                    name="category"
+                    value={formData.category}
+                    label="Select a category"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="">Select a category</MenuItem>
+                    {categories.map((category) => (
+                      <MenuItem key={category._id} value={category._id}>
+                        {category.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                {formData.category && availableSubcategories.length > 0 && (
+                  <FormControl sx={{ width: '100%' }}>
+                    <InputLabel id="subcategories-label">Select subcategories</InputLabel>
+                    <Select
+                      labelId="subcategories-label"
+                      id="subcategories"
+                      name="subcategories"
+                      multiple
+                      value={formData.subcategories}
+                      label="Select subcategories"
+                      onChange={handleChange}
+                    >
+                      {availableSubcategories.map((subcategory) => (
+                        <MenuItem key={subcategory._id} value={subcategory._id}>
+                          {subcategory.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              </div>
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Images</label>
                 <div className="space-y-2">
                   {formData.images.map((url, index) => (
@@ -360,9 +468,17 @@ const AdminProducts = () => {
                         Dimensions: {product.dimensions}
                       </Typography>
                     )}
-                    <Typography color="text.secondary">
+                    <Typography color="text.secondary" gutterBottom>
                       Quantity: {product.quantity}
                     </Typography>
+                    <Typography color="text.secondary" gutterBottom>
+                      Category: {product.category?.name || 'Uncategorized'}
+                    </Typography>
+                    {product.subcategories?.length > 0 && (
+                      <Typography color="text.secondary">
+                        Subcategories: {product.subcategories.map(sub => sub.name).join(', ')}
+                      </Typography>
+                    )}
                   </CardContent>
                   <CardActions>
                     <Button size="small" onClick={() => handleEdit(product)}>
