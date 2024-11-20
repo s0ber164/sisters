@@ -5,10 +5,10 @@ const SearchBar = () => {
   const { searchQuery, setSearchQuery } = useProducts();
 
   return (
-    <div className="relative max-w-xl w-full">
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <div className="relative max-w-full w-full group">
+      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
         <svg 
-          className="h-5 w-5 text-gray-400" 
+          className="h-5 w-5 text-gray-400 group-focus-within:text-primary-500" 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 20 20" 
           fill="currentColor" 
@@ -23,18 +23,18 @@ const SearchBar = () => {
       </div>
       <input
         type="text"
-        placeholder="Search props by name or dimensions..."
+        placeholder="Search props by name, dimensions, or description..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+        className="block w-full pl-11 pr-12 py-3 border-0 text-gray-900 placeholder:text-gray-400 bg-white/90 backdrop-blur-sm rounded-lg focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all duration-200"
       />
       {searchQuery && (
         <button
           onClick={() => setSearchQuery('')}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center"
+          className="absolute inset-y-0 right-0 pr-4 flex items-center"
         >
           <svg 
-            className="h-5 w-5 text-gray-400 hover:text-gray-500" 
+            className="h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors" 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 20 20" 
             fill="currentColor"

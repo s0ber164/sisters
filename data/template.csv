@@ -1,6 +1,6 @@
-name,description,price,quantity,dimensions,category,subcategories
-"Vintage Sofa","Mid-century modern sofa in blue velvet",599.99,1,"72""W x 36""D x 32""H","Furniture","Seating, Vintage"
-"Crystal Chandelier","Large crystal chandelier, perfect for ballroom scenes",899.99,1,"36""W x 36""D x 48""H","Lighting","Chandeliers"
-"Persian Rug","Authentic Persian rug with intricate patterns",299.99,2,"96""W x 120""L","Decor","Rugs, Vintage"
-"Throw Pillows Set","Set of 4 decorative pillows in coordinating patterns",79.99,3,"18""W x 18""H","Softs","Pillows"
-"Director's Chair","Classic wooden director's chair with canvas",149.99,4,"24""W x 18""D x 36""H","Furniture","Seating, Film Equipment"
+name,description,price,quantity,dimensions,category,subcategories,image_url
+"Vintage Sofa","",599.99,1,"72""W x 36""D x 32""H","Furniture","Seating, Vintage","https://example.com/sofa.jpg"
+"Crystal Chandelier","Large crystal chandelier, perfect for ballroom scenes",899.99,1,"36""W x 36""D x 48""H","Lighting","Chandeliers",""
+"Persian Rug",null,299.99,2,"96""W x 120""L","Decor","Rugs, Vintage","https://example.com/rug1.jpg, https://example.com/rug2.jpg"
+"Throw Pillows Set","Set of 4 decorative pillows in coordinating patterns",79.99,3,"18""W x 18""H","Softs","Pillows",""
+"Director's Chair","",149.99,4,"24""W x 18""D x 36""H","Furniture","Seating, Film Equipment",""

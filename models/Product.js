@@ -8,8 +8,8 @@ const ProductSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, 'Please provide a description'],
     trim: true,
+    default: '', 
   },
   price: {
     type: Number,
@@ -49,6 +49,5 @@ const ProductSchema = new mongoose.Schema({
 // Add indexes for better query performance
 ProductSchema.index({ category: 1 });
 ProductSchema.index({ subcategories: 1 });
-ProductSchema.index({ name: 'text', description: 'text' });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);

@@ -1,0 +1,3 @@
+name,description,price,quantity,dimensions,category,subcategories,image_url
+Test Prop 1,A beautiful test prop,99.99,5,10x20x30,Props,Vintage Props,https://images.unsplash.com/photo-1550686041-366ad85a1355
+Test Prop 2,Another amazing prop,149.99,3,15x25x35,Props,Modern Props,https://images.unsplash.com/photo-1550686041-366ad85a1355

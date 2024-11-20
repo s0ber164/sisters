@@ -10,6 +10,10 @@
     "create-categories": "node scripts/createCategories.js"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
     "axios": "^1.7.7",
     "cookie": "^1.0.1",
     "csv-parse": "^5.5.6",

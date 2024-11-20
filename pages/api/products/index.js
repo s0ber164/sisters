@@ -28,15 +28,20 @@ export default async function handler(req, res) {
           
           // Validate required fields
           if (!productData.name) throw new Error('Product name is required');
-          if (!productData.description) throw new Error('Product description is required');
-          if (!productData.price) throw new Error('Product price is required');
+          if (!productData.price && productData.price !== 0) throw new Error('Product price is required');
           if (!productData.category) throw new Error('Product category is required');
 
+          // Set default values for optional fields
+          productData.description = productData.description || '';
+          productData.quantity = productData.quantity || 1;
+          productData.dimensions = productData.dimensions || '';
+          productData.subcategories = productData.subcategories || [];
+          productData.images = productData.images || [];
+
           const product = await Product.create(productData);
-          const populatedProduct = await product
+          const populatedProduct = await Product.findById(product._id)
             .populate('category')
-            .populate('subcategories')
-            .execPopulate();
+            .populate('subcategories');
 
           return res.status(201).json(populatedProduct);
         } catch (error) {

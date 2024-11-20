@@ -85,23 +85,28 @@ const Home = () => {
               Discover our extensive collection of high-quality furniture and props 
               for film, television, and theatrical productions.
             </p>
+            <div className="mt-8 max-w-2xl w-full bg-white/10 backdrop-blur-md rounded-lg p-2">
+              <SearchBar />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Products Section */}
       <main className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-primary-900">
-            Available Props
-          </h2>
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 mb-8">
+          <div className="w-full md:w-auto">
+            <h2 className="text-3xl font-bold text-primary-900 mb-4">
+              Available Props {filteredProducts.length > 0 && `(${filteredProducts.length})`}
+            </h2>
+            <CategoryFilter 
+              activeCategory={activeCategory}
+              onCategoryChange={handleCategoryChange}
+              className="w-full md:w-auto"
+            />
+          </div>
         </div>
         
-        <CategoryFilter 
-          activeCategory={activeCategory}
-          onCategoryChange={handleCategoryChange}
-        />
-
         {loading ? (
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
