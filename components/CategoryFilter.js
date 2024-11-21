@@ -4,6 +4,7 @@ const CategoryFilter = ({ onCategoryChange }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -18,15 +19,19 @@ const CategoryFilter = ({ onCategoryChange }) => {
         
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json().catch(() => ({ success: false }));
-        if (!data.success) {
+        const data = await response.json();
+        console.log('Categories data:', data); // Debug log
+
+        if (!data.success || !Array.isArray(data.data)) {
           throw new Error('Failed to fetch categories');
         }
 
-        setCategories(data.data);
+        // Filter out categories with parent (they are subcategories)
+        const mainCategories = data.data.filter(cat => !cat.parent);
+        setCategories(mainCategories);
         setError(null);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -39,18 +44,40 @@ const CategoryFilter = ({ onCategoryChange }) => {
     fetchCategories();
   }, []);
 
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId);
+    onCategoryChange(categoryId);
+  };
+
   if (loading) {
     return (
-      <div className="animate-pulse">
-        <div className="h-8 bg-gray-200 rounded w-full mb-4"></div>
+      <div className="animate-pulse space-y-2">
+        <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+        <div className="h-10 bg-gray-200 rounded w-full"></div>
+        <div className="h-10 bg-gray-200 rounded w-full"></div>
+        <div className="h-10 bg-gray-200 rounded w-full"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-red-500 text-sm">
-        Error loading categories. Please try again later.
+      <div className="text-red-500 text-sm p-4 bg-red-50 rounded-lg">
+        <p>Error loading categories.</p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="text-red-600 hover:text-red-700 underline mt-2"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if (!categories.length) {
+    return (
+      <div className="text-gray-500 text-sm p-4 bg-gray-50 rounded-lg">
+        No categories available
       </div>
     );
   }
@@ -60,16 +87,24 @@ const CategoryFilter = ({ onCategoryChange }) => {
       <h2 className="text-lg font-semibold mb-3 text-gray-700">Categories</h2>
       <div className="space-y-2">
         <button
-          onClick={() => onCategoryChange('all')}
-          className="w-full text-left px-3 py-2 rounded hover:bg-primary-50 transition-colors duration-150 text-gray-700 hover:text-primary-600"
+          onClick={() => handleCategoryClick('all')}
+          className={`w-full text-left px-3 py-2 rounded transition-colors duration-150 ${
+            selectedCategory === 'all'
+              ? 'bg-primary-50 text-primary-600'
+              : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+          }`}
         >
           All Categories
         </button>
         {categories.map((category) => (
           <button
             key={category._id}
-            onClick={() => onCategoryChange(category._id)}
-            className="w-full text-left px-3 py-2 rounded hover:bg-primary-50 transition-colors duration-150 text-gray-700 hover:text-primary-600"
+            onClick={() => handleCategoryClick(category._id)}
+            className={`w-full text-left px-3 py-2 rounded transition-colors duration-150 ${
+              selectedCategory === category._id
+                ? 'bg-primary-50 text-primary-600'
+                : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+            }`}
           >
             {category.name}
           </button>

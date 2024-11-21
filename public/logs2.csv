@@ -1,0 +1,863 @@
+"TimeUTC","timestampInMs","requestPath","requestMethod","responseStatusCode","requestId","requestUserAgent","level","environment","branch","vercelCache","type","function","host","deploymentDomain","deploymentId","lambdaDurationInMs","lambdaRegion","lambdaMaxMemoryUsed","lambdaMemorySize","message","projectId","wafAction"
+"2024-11-21 22:47:46",1732229266869,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::hzcz5-1732229261827-b76ea209daca","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4120)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:47:46",1732229266869,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::hzcz5-1732229261827-b76ea209daca","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4120)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:47:41",1732229261862,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::hzcz5-1732229261827-b76ea209daca","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:47:41",1732229261842,"sisters-df7a.vercel.app/api/categories","GET",500,"iad1::iad1::hzcz5-1732229261827-b76ea209daca","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",5012,"iad1",117,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:47:00",1732229220135,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::hv78s-1732229215009-b5a9504d2b58","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4120)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:47:00",1732229220134,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::hv78s-1732229215009-b5a9504d2b58","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4120)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:46:55",1732229215104,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::hv78s-1732229215009-b5a9504d2b58","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:46:55",1732229215029,"sisters-df7a.vercel.app/api/categories","GET",500,"iad1::iad1::hv78s-1732229215009-b5a9504d2b58","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",5085,"iad1",117,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:45:30",1732229130979,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::6mxlz-1732229123611-d51e634d8e47","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4120)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:45:30",1732229130979,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::6mxlz-1732229123611-d51e634d8e47","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4120)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:45:25",1732229125833,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::6mxlz-1732229123611-d51e634d8e47","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:45:23",1732229123615,"sisters-df7a.vercel.app/api/categories","GET",500,"iad1::iad1::6mxlz-1732229123611-d51e634d8e47","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_ERXdAp9CBDERxTLKQLSCYJKphqgt",5911,"iad1",116,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383971,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::hkd6z-1732230382211-ff0c61e12902","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383970,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::hkd6z-1732230382211-ff0c61e12902","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383970,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::hkd6z-1732230382211-ff0c61e12902","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383970,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::hkd6z-1732230382211-ff0c61e12902","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Processing GET request to /api/products","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383960,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::c7m5n-1732230382299-fac47cd691ee","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383959,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::c7m5n-1732230382299-fac47cd691ee","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383959,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::c7m5n-1732230382299-fac47cd691ee","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383959,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::c7m5n-1732230382299-fac47cd691ee","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Processing GET request to /api/categories","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383944,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::tkztg-1732230382310-25e259018c17","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383943,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::tkztg-1732230382310-25e259018c17","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383943,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::tkztg-1732230382310-25e259018c17","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383943,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::tkztg-1732230382310-25e259018c17","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Processing GET request to /api/products","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383304,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::pcvzn-1732230382207-fb08fa0a6c59","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383303,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::pcvzn-1732230382207-fb08fa0a6c59","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383303,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::pcvzn-1732230382207-fb08fa0a6c59","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:23",1732230383302,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::pcvzn-1732230382207-fb08fa0a6c59","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Processing GET request to /api/categories","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:22",1732230382351,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",504,"sfo1::iad1::tkztg-1732230382310-25e259018c17","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:22",1732230382343,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/products","GET",504,"sfo1::iad1::hkd6z-1732230382211-ff0c61e12902","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:22",1732230382337,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",504,"sfo1::iad1::c7m5n-1732230382299-fac47cd691ee","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:22",1732230382329,"sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app/api/categories","GET",504,"sfo1::iad1::pcvzn-1732230382207-fb08fa0a6c59","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","sisters-df7a-6dvgh7zqk-s0ber164s-projects.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",10000,"iad1",112,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:54",1732230414165,"sisters-df7a.vercel.app/api/products","GET",504,"iad1::iad1::7cmtd-1732230414136-c40e77b66dbf","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:54",1732230414157,"sisters-df7a.vercel.app/api/categories","GET",504,"iad1::iad1::vj99f-1732230414137-39e8bf315df6","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415420,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::vj99f-1732230414137-39e8bf315df6","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415420,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::vj99f-1732230414137-39e8bf315df6","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415420,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::vj99f-1732230414137-39e8bf315df6","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415411,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::vj99f-1732230414137-39e8bf315df6","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Processing GET request to /api/categories","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415400,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::7cmtd-1732230414136-c40e77b66dbf","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415400,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::7cmtd-1732230414136-c40e77b66dbf","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415399,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::7cmtd-1732230414136-c40e77b66dbf","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:06:55",1732230415390,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::7cmtd-1732230414136-c40e77b66dbf","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_6o3AjUw7aaumqtc1ae1jebUSyKfA",-1,"iad1",-1,-1,"Processing GET request to /api/products","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020426,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::8c7nn-1732230019070-b0f45c92f54b","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020425,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::8c7nn-1732230019070-b0f45c92f54b","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020425,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::8c7nn-1732230019070-b0f45c92f54b","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020425,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::8c7nn-1732230019070-b0f45c92f54b","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Processing GET request to /api/products","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020369,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::x4fxb-1732230019068-79eeabb33973","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020368,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::x4fxb-1732230019068-79eeabb33973","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020368,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::x4fxb-1732230019068-79eeabb33973","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:20",1732230020368,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::x4fxb-1732230019068-79eeabb33973","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Processing GET request to /api/categories","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:19",1732230019108,"sisters-df7a.vercel.app/api/products","GET",504,"iad1::iad1::8c7nn-1732230019070-b0f45c92f54b","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 23:00:19",1732230019096,"sisters-df7a.vercel.app/api/categories","GET",504,"iad1::iad1::x4fxb-1732230019068-79eeabb33973","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",10000,"iad1",110,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:47",1732229987753,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::8szlw-1732229976935-72639133ede1","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Vercel Runtime Timeout Error: Task timed out after 10 seconds","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978746,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::vsd7j-1732229976928-71ac1738f030","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978745,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::vsd7j-1732229976928-71ac1738f030","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978745,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::vsd7j-1732229976928-71ac1738f030","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978745,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::vsd7j-1732229976928-71ac1738f030","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Processing GET request to /api/products","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978713,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::99nhg-1732229976928-c3da52c97f6f","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978713,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::99nhg-1732229976928-c3da52c97f6f","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978712,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::99nhg-1732229976928-c3da52c97f6f","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978712,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::99nhg-1732229976928-c3da52c97f6f","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Processing GET request to /api/categories","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978709,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::8szlw-1732229976935-72639133ede1","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978709,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::8szlw-1732229976935-72639133ede1","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978708,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::8szlw-1732229976935-72639133ede1","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978708,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::8szlw-1732229976935-72639133ede1","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Processing GET request to /api/products","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978033,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::8tv5d-1732229976928-82e23bdb2dd7","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"MongoDB URI format check: true","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978033,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::8tv5d-1732229976928-82e23bdb2dd7","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Initiating MongoDB connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978032,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::8tv5d-1732229976928-82e23bdb2dd7","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Attempting database connection...","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:38",1732229978032,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::8tv5d-1732229976928-82e23bdb2dd7","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",-1,"iad1",-1,-1,"Processing GET request to /api/categories","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:37",1732229977098,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",504,"sfo1::iad1::vsd7j-1732229976928-71ac1738f030","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:37",1732229977092,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/products","GET",504,"sfo1::iad1::8szlw-1732229976935-72639133ede1","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",10000,"iad1",112,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:37",1732229977071,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",504,"sfo1::iad1::99nhg-1732229976928-c3da52c97f6f","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",10000,"iad1",111,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:59:37",1732229977070,"sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app/api/categories","GET",504,"sfo1::iad1::8tv5d-1732229976928-82e23bdb2dd7","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","sisters-df7a-7y0kh0lhx-s0ber164s-projects.vercel.app","dpl_CkyoZdvHZkwYkdhp3hCKZjBrwNji",10000,"iad1",112,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:45",1732229745465,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::kqlmb-1732229738781-673e0c93b95f","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:45",1732229745465,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::kqlmb-1732229738781-673e0c93b95f","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:44",1732229744733,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::k47x9-1732229738781-d162c31209ad","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:44",1732229744733,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::k47x9-1732229738781-d162c31209ad","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:39",1732229739654,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::k47x9-1732229738781-d162c31209ad","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:38",1732229738828,"sisters-df7a.vercel.app/api/products","GET",500,"iad1::iad1::kqlmb-1732229738781-673e0c93b95f","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",5995,"iad1",117,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:55:38",1732229738806,"sisters-df7a.vercel.app/api/categories","GET",500,"iad1::iad1::k47x9-1732229738781-d162c31209ad","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",5967,"iad1",114,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:47",1732229687077,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::l9xzv-1732229680100-c96a04412ea2","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:47",1732229687077,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::l9xzv-1732229680100-c96a04412ea2","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:47",1732229687076,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::p4rvk-1732229680104-3564213e66de","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:47",1732229687075,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::p4rvk-1732229680104-3564213e66de","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:47",1732229687062,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::pjsvh-1732229680154-8780630345a4","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:47",1732229687062,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/products","GET",-10,"sfo1::iad1::pjsvh-1732229680154-8780630345a4","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:46",1732229686405,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::vqh4k-1732229680144-e6f510d97231","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:46",1732229686405,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::vqh4k-1732229680144-e6f510d97231","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:41",1732229681896,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::l9xzv-1732229680100-c96a04412ea2","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:41",1732229681233,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",-10,"sfo1::iad1::vqh4k-1732229680144-e6f510d97231","['vercel-screenshot/1.0']","info","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:40",1732229680238,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/products","GET",500,"sfo1::iad1::pjsvh-1732229680154-8780630345a4","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",6345,"iad1",136,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:40",1732229680238,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/products","GET",500,"sfo1::iad1::p4rvk-1732229680104-3564213e66de","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/products","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",6392,"iad1",135,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:40",1732229680227,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",500,"sfo1::iad1::vqh4k-1732229680144-e6f510d97231","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",6391,"iad1",128,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:54:40",1732229680227,"sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app/api/categories","GET",500,"sfo1::iad1::l9xzv-1732229680100-c96a04412ea2","['vercel-screenshot/1.0']","error","production","main","MISS","lambda","/api/categories","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","sisters-df7a-czs3zldbf-s0ber164s-projects.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",6377,"iad1",127,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:39",1732229799625,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::znxps-1732229794583-b83a456262d4","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:39",1732229799624,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::znxps-1732229794583-b83a456262d4","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:39",1732229799616,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::k47x9-1732229794583-355546cdf282","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:39",1732229799615,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::k47x9-1732229794583-355546cdf282","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:34",1732229794612,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::znxps-1732229794583-b83a456262d4","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:34",1732229794588,"sisters-df7a.vercel.app/api/categories","GET",500,"iad1::iad1::znxps-1732229794583-b83a456262d4","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",5061,"iad1",118,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:34",1732229794587,"sisters-df7a.vercel.app/api/products","GET",500,"iad1::iad1::k47x9-1732229794583-355546cdf282","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",5050,"iad1",114,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:26",1732229786232,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::k47x9-1732229780839-7cca3833a8da","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:26",1732229786232,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::k47x9-1732229780839-7cca3833a8da","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async c (/var/task/.next/server/pages/api/categories.js:1:4156)
+    at async d (/var/task/.next/server/pages/api/categories.js:1:945)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:25",1732229785943,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::chk5b-1732229780831-b7cac890eb00","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Database connection failed: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:25",1732229785943,"sisters-df7a.vercel.app/api/products","GET",-10,"iad1::iad1::chk5b-1732229780831-b7cac890eb00","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"MongoDB connection error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+    at _handleConnectionErrors (/var/task/node_modules/mongoose/lib/connection.js:909:11)
+    at NativeConnection.openUri (/var/task/node_modules/mongoose/lib/connection.js:860:11)
+    at async i (/var/task/.next/server/pages/api/products.js:1:3880)
+    at async l (/var/task/.next/server/pages/api/products.js:1:709)
+    at async K (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16545)
+    at async U.render (/var/task/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:20:16981)
+    at async r3.runApi (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:41752)
+    at async r3.handleCatchallRenderRequest (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:17:36452)
+    at async r3.runImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:17030)
+    at async r3.handleRequestImpl (/var/task/node_modules/next/dist/compiled/next-server/server.runtime.prod.js:16:16123) {
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'sisprops-shard-00-00.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-01.isp0v.mongodb.net:27017' => [ServerDescription],
+      'sisprops-shard-00-02.isp0v.mongodb.net:27017' => [ServerDescription]
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 30000,
+    localThresholdMS: 15,
+    setName: 'atlas-108r76-shard-0',
+    maxElectionId: null,
+    maxSetVersion: null,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined
+}","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:21",1732229781227,"sisters-df7a.vercel.app/api/categories","GET",-10,"iad1::iad1::k47x9-1732229780839-7cca3833a8da","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","info","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",-1,"iad1",-1,-1,"Starting categories API request: GET","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:21",1732229781146,"sisters-df7a.vercel.app/api/categories","GET",500,"iad1::iad1::k47x9-1732229780839-7cca3833a8da","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/categories","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",5077,"iad1",114,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"
+"2024-11-21 22:56:20",1732229780837,"sisters-df7a.vercel.app/api/products","GET",500,"iad1::iad1::chk5b-1732229780831-b7cac890eb00","['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36']","error","production","main","MISS","lambda","/api/products","sisters-df7a.vercel.app","sisters-df7a.vercel.app","dpl_312A8KnSaVbvTAyAD4qWoxkLFFhv",5098,"iad1",118,1024,"","prj_7xx7jyBIx7TVbsecAkjVlMNKhztf","-"

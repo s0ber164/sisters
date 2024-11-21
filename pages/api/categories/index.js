@@ -28,8 +28,12 @@ export default async function handler(req, res) {
         try {
           console.log('Executing categories query...');
           const categories = await Category.find({})
-            .select('name description') // Only select needed fields
-            .lean() // Convert to plain JavaScript objects
+            .select('name description slug parent') // Include all required fields
+            .populate({
+              path: 'subcategories',
+              select: 'name slug',
+            })
+            .lean()
             .maxTimeMS(5000);
           
           console.log(`Query successful, found ${categories.length} categories`);
