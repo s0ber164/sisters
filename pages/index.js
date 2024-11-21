@@ -62,8 +62,8 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-primary-50">
       <Head>
-        <title>SIS Props - Product Catalog</title>
-        <meta name="description" content="Browse our collection of props for film and theater" />
+        <title>Sisters Props - Film & TV Prop Rentals</title>
+        <meta name="description" content="Film and TV prop rentals - your one-stop shop for all your production needs" />
       </Head>
 
       {/* Navigation */}
