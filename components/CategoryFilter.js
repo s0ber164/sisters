@@ -10,28 +10,20 @@ const CategoryFilter = ({ onCategoryChange }) => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/categories', {
-          credentials: 'same-origin',
-          headers: {
-            'Accept': 'application/json',
-          }
-        });
+        const response = await fetch('/api/categories');
         
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('Categories data:', data); // Debug log
+        console.log('Categories response:', data); // Debug log
 
         if (!data.success || !Array.isArray(data.data)) {
-          throw new Error('Failed to fetch categories');
+          throw new Error('Invalid response format');
         }
 
-        // Filter out categories with parent (they are subcategories)
-        const mainCategories = data.data.filter(cat => !cat.parent);
-        setCategories(mainCategories);
+        setCategories(data.data);
         setError(null);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -55,7 +47,6 @@ const CategoryFilter = ({ onCategoryChange }) => {
         <div className="h-6 bg-gray-200 rounded w-3/4"></div>
         <div className="h-10 bg-gray-200 rounded w-full"></div>
         <div className="h-10 bg-gray-200 rounded w-full"></div>
-        <div className="h-10 bg-gray-200 rounded w-full"></div>
       </div>
     );
   }
@@ -63,12 +54,12 @@ const CategoryFilter = ({ onCategoryChange }) => {
   if (error) {
     return (
       <div className="text-red-500 text-sm p-4 bg-red-50 rounded-lg">
-        <p>Error loading categories.</p>
+        <p>Error loading categories: {error}</p>
         <button 
           onClick={() => window.location.reload()} 
           className="text-red-600 hover:text-red-700 underline mt-2"
         >
-          Try again
+          Retry
         </button>
       </div>
     );

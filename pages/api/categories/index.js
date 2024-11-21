@@ -27,14 +27,24 @@ export default async function handler(req, res) {
       case 'GET':
         try {
           console.log('Executing categories query...');
-          const categories = await Category.find({})
-            .select('name description slug parent') // Include all required fields
-            .populate({
-              path: 'subcategories',
-              select: 'name slug',
-            })
+          let categories = await Category.find({})
+            .select('name description slug') 
             .lean()
             .maxTimeMS(5000);
+          
+          // If no categories exist, create default ones
+          if (categories.length === 0) {
+            console.log('No categories found, creating defaults...');
+            const defaultCategories = [
+              { name: 'Furniture', slug: 'furniture' },
+              { name: 'Decor', slug: 'decor' },
+              { name: 'Lighting', slug: 'lighting' },
+              { name: 'Textiles', slug: 'textiles' }
+            ];
+            
+            categories = await Category.insertMany(defaultCategories);
+            console.log('Created default categories:', categories);
+          }
           
           console.log(`Query successful, found ${categories.length} categories`);
           return res.status(200).json({

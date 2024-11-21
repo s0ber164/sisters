@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",
-    "create-categories": "node scripts/createCategories.js"
+    "create-categories": "node scripts/createCategories.js",
+    "seed-categories": "node scripts/seed-categories.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
