@@ -1,70 +1,76 @@
-import React, { useState } from 'react';
-import { useCategories } from '../context/CategoryContext';
+import React, { useState, useEffect } from 'react';
+import { config } from '../utils/config';
 
-const CategoryFilter = ({ activeCategory, onCategoryChange }) => {
-  const { categories, getSubcategories } = useCategories();
-  const [selectedMainCategory, setSelectedMainCategory] = useState(null);
-  
-  const mainCategories = [
-    { id: 'all', name: 'All' },
-    ...(categories?.filter(cat => !cat.parent) || [])
-  ];
+const CategoryFilter = ({ onCategoryChange }) => {
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleMainCategoryClick = (category) => {
-    if (category.id === 'all') {
-      setSelectedMainCategory(null);
-      onCategoryChange('all');
-      return;
-    }
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`${config.baseUrl}/api/categories`);
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        }
 
-    if (selectedMainCategory === category._id) {
-      setSelectedMainCategory(null);
-      onCategoryChange('all');
-    } else {
-      setSelectedMainCategory(category._id);
-      onCategoryChange(category._id);
-    }
-  };
+        const data = await response.json().catch(() => ({ success: false }));
+        if (!data.success) {
+          throw new Error('Failed to fetch categories');
+        }
 
-  const subcategories = selectedMainCategory ? getSubcategories(selectedMainCategory) : [];
+        setCategories(data.data);
+        setError(null);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="animate-pulse">
+        <div className="h-8 bg-gray-200 rounded w-full mb-4"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-500 text-sm">
+        Error loading categories. Please try again later.
+      </div>
+    );
+  }
 
   return (
-    <div className="mb-8 space-y-4">
-      {/* Main Categories */}
-      <div className="flex flex-wrap gap-2">
-        {mainCategories.map((category) => (
+    <div className="mb-6">
+      <h2 className="text-lg font-semibold mb-3 text-gray-700">Categories</h2>
+      <div className="space-y-2">
+        <button
+          onClick={() => onCategoryChange('all')}
+          className="w-full text-left px-3 py-2 rounded hover:bg-primary-50 transition-colors duration-150 text-gray-700 hover:text-primary-600"
+        >
+          All Categories
+        </button>
+        {categories.map((category) => (
           <button
-            key={category.id || category._id}
-            onClick={() => handleMainCategoryClick(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
-              ${(activeCategory === (category.id || category._id) || selectedMainCategory === category._id)
-                ? 'bg-primary-600 text-white'
-                : 'bg-primary-100 text-primary-700 hover:bg-primary-200'
-              }`}
+            key={category._id}
+            onClick={() => onCategoryChange(category._id)}
+            className="w-full text-left px-3 py-2 rounded hover:bg-primary-50 transition-colors duration-150 text-gray-700 hover:text-primary-600"
           >
             {category.name}
           </button>
         ))}
       </div>
-
-      {/* Subcategories */}
-      {subcategories.length > 0 && (
-        <div className="flex flex-wrap gap-2 pl-4 border-l-2 border-primary-200">
-          {subcategories.map((subcategory) => (
-            <button
-              key={subcategory._id}
-              onClick={() => onCategoryChange(subcategory._id)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors
-                ${activeCategory === subcategory._id
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-primary-50 text-primary-600 hover:bg-primary-100'
-                }`}
-            >
-              {subcategory.name}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

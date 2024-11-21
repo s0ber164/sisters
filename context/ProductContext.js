@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { config } from '../utils/config';
 
 const ProductContext = createContext();
 
@@ -20,21 +21,21 @@ export const ProductProvider = ({ children }) => {
       try {
         setLoading(true);
         console.log('Fetching products from API...');
-        const response = await fetch('/api/products');
+        const response = await fetch(`${config.baseUrl}/api/products`);
         console.log('API Response status:', response.status);
         
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Failed to fetch products');
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
         }
         
-        const { success, data } = await response.json();
-        if (!success) {
+        const data = await response.json().catch(() => ({ success: false }));
+        if (!data.success) {
           throw new Error('Failed to fetch products');
         }
         
-        console.log('Products fetched successfully:', data.length);
-        setProducts(data);
+        console.log('Products fetched successfully:', data.data.length);
+        setProducts(data.data);
         setError(null);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -75,29 +76,29 @@ export const ProductProvider = ({ children }) => {
     setError(null);
     try {
       console.log('Uploading CSV file...');
-      const response = await fetch('/api/products/upload', {
+      const response = await fetch(`${config.baseUrl}/api/products/upload`, {
         method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to upload products');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
       
-      const result = await response.json();
+      const result = await response.json().catch(() => ({ success: false }));
       console.log('Products uploaded successfully:', result.count);
       
       // Refresh the products list
-      const productsResponse = await fetch('/api/products');
+      const productsResponse = await fetch(`${config.baseUrl}/api/products`);
       if (!productsResponse.ok) {
         throw new Error('Failed to fetch updated products');
       }
-      const { success, data: updatedProducts } = await productsResponse.json();
-      if (!success) {
+      const data = await productsResponse.json().catch(() => ({ success: false }));
+      if (!data.success) {
         throw new Error('Failed to fetch updated products');
       }
-      setProducts(updatedProducts);
+      setProducts(data.data);
       setError(null);
       return result;
     } catch (error) {
@@ -138,7 +139,7 @@ export const ProductProvider = ({ children }) => {
 
   const updateProduct = async (productId, productData) => {
     try {
-      const response = await fetch(`/api/products/${productId}`, {
+      const response = await fetch(`${config.baseUrl}/api/products/${productId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -147,11 +148,11 @@ export const ProductProvider = ({ children }) => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update product');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
 
-      const updatedProduct = await response.json();
+      const updatedProduct = await response.json().catch(() => ({ success: false }));
       setProducts(products.map(p => p._id === productId ? updatedProduct : p));
       return updatedProduct;
     } catch (error) {
@@ -162,14 +163,14 @@ export const ProductProvider = ({ children }) => {
 
   const getProduct = async (productId) => {
     try {
-      const response = await fetch(`/api/products/${productId}`);
+      const response = await fetch(`${config.baseUrl}/api/products/${productId}`);
       
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to fetch product');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
 
-      const product = await response.json();
+      const product = await response.json().catch(() => ({ success: false }));
       return product;
     } catch (error) {
       console.error('Error fetching product:', error);
@@ -179,13 +180,13 @@ export const ProductProvider = ({ children }) => {
 
   const deleteProduct = async (productId) => {
     try {
-      const response = await fetch(`/api/products/${productId}`, {
+      const response = await fetch(`${config.baseUrl}/api/products/${productId}`, {
         method: 'DELETE',
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to delete product');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
 
       // Use _id consistently for both filters
