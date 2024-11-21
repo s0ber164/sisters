@@ -24,6 +24,11 @@ const nextConfig = {
         hostname: 'via.placeholder.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'sisters-df7a-18jwaykhm-s0ber164s-projects.vercel.app',
+        pathname: '/**',
+      }
     ],
   },
 }
