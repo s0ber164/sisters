@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { config } from '../utils/config';
 
 const ProductContext = createContext();
 
@@ -21,7 +20,12 @@ export const ProductProvider = ({ children }) => {
       try {
         setLoading(true);
         console.log('Fetching products from API...');
-        const response = await fetch(`${config.baseUrl}/api/products`);
+        const response = await fetch('/api/products', {
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+          }
+        });
         console.log('API Response status:', response.status);
         
         if (!response.ok) {
@@ -76,8 +80,9 @@ export const ProductProvider = ({ children }) => {
     setError(null);
     try {
       console.log('Uploading CSV file...');
-      const response = await fetch(`${config.baseUrl}/api/products/upload`, {
+      const response = await fetch('/api/products/upload', {
         method: 'POST',
+        credentials: 'same-origin',
         body: formData,
       });
 
@@ -90,7 +95,9 @@ export const ProductProvider = ({ children }) => {
       console.log('Products uploaded successfully:', result.count);
       
       // Refresh the products list
-      const productsResponse = await fetch(`${config.baseUrl}/api/products`);
+      const productsResponse = await fetch('/api/products', {
+        credentials: 'same-origin',
+      });
       if (!productsResponse.ok) {
         throw new Error('Failed to fetch updated products');
       }
@@ -139,8 +146,9 @@ export const ProductProvider = ({ children }) => {
 
   const updateProduct = async (productId, productData) => {
     try {
-      const response = await fetch(`${config.baseUrl}/api/products/${productId}`, {
+      const response = await fetch(`/api/products/${productId}`, {
         method: 'PUT',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -163,7 +171,9 @@ export const ProductProvider = ({ children }) => {
 
   const getProduct = async (productId) => {
     try {
-      const response = await fetch(`${config.baseUrl}/api/products/${productId}`);
+      const response = await fetch(`/api/products/${productId}`, {
+        credentials: 'same-origin',
+      });
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -180,8 +190,9 @@ export const ProductProvider = ({ children }) => {
 
   const deleteProduct = async (productId) => {
     try {
-      const response = await fetch(`${config.baseUrl}/api/products/${productId}`, {
+      const response = await fetch(`/api/products/${productId}`, {
         method: 'DELETE',
+        credentials: 'same-origin',
       });
 
       if (!response.ok) {

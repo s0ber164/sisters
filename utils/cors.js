@@ -14,16 +14,33 @@ function initMiddleware(middleware) {
     });
 }
 
+// Determine if an origin is allowed
+const isAllowedOrigin = (origin) => {
+  if (!origin) return false;
+  
+  const allowedDomains = [
+    'vercel.app',
+    'localhost:3000'
+  ];
+  
+  return allowedDomains.some(domain => 
+    origin.includes(domain)
+  );
+};
+
 // Initialize the cors middleware
 const cors = initMiddleware(
   Cors({
-    origin: [
-      'https://sisters-df7a.vercel.app',
-      'https://sisters-df7a-3b89jidl6-s0ber164s-projects.vercel.app',
-      'http://localhost:3000'
-    ],
+    origin: (origin, callback) => {
+      if (!origin || isAllowedOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 

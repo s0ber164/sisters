@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { config } from '../utils/config';
 
 const CategoryFilter = ({ onCategoryChange }) => {
   const [categories, setCategories] = useState([]);
@@ -10,7 +9,12 @@ const CategoryFilter = ({ onCategoryChange }) => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${config.baseUrl}/api/categories`);
+        const response = await fetch('/api/categories', {
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+          }
+        });
         
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
