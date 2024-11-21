@@ -1,7 +1,11 @@
 import dbConnect from '../../../utils/dbConnect';
 import Product from '../../../models/Product';
+import cors from '../../../utils/cors';
 
 export default async function handler(req, res) {
+  // Run the CORS middleware
+  await cors(req, res);
+
   const { method } = req;
 
   try {

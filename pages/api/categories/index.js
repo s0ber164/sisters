@@ -1,5 +1,6 @@
 import dbConnect from '../../../utils/dbConnect';
 import Category from '../../../models/Category';
+import cors from '../../../utils/cors';
 
 // Add caching
 let categoriesCache = {
@@ -10,6 +11,9 @@ let categoriesCache = {
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 export default async function handler(req, res) {
+  // Run the CORS middleware
+  await cors(req, res);
+
   const { method } = req;
 
   console.log('Starting categories API request:', method);
