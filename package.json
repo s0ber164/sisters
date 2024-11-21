@@ -25,13 +25,18 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.1",
-    "next": "^14.1.0",
+    "next": "14.1.0",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.16",
-    "papaparse": "latest",
-    "react": "latest",
+    "papaparse": "^5.4.1",
+    "react": "^18.2.0",
     "react-colorful": "^5.6.1",
-    "react-dom": "latest"
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.12.0",
+    "react-select": "^5.8.0",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
