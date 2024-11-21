@@ -25,7 +25,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.1",
-    "next": "latest",
+    "next": "^14.1.0",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.9.16",
     "papaparse": "latest",

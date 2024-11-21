@@ -165,7 +165,7 @@ export default function ProductForm({ initialData, onSubmit, onCancel }) {
           name="dimensions"
           value={formData.dimensions}
           onChange={handleChange}
-          placeholder="e.g., 24"W x 36"H x 18"D"
+          placeholder='e.g., 24"W x 36"H x 18"D'
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
         />
       </div>
