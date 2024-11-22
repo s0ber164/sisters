@@ -23,7 +23,9 @@ const CategoryFilter = ({ onCategoryChange }) => {
           throw new Error('Invalid response format');
         }
 
-        setCategories(data.data);
+        // Only get main categories (those without a parent)
+        const mainCategories = data.data.filter(cat => !cat.parent);
+        setCategories(mainCategories);
         setError(null);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -45,6 +47,7 @@ const CategoryFilter = ({ onCategoryChange }) => {
     return (
       <div className="animate-pulse space-y-2">
         <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+        <div className="h-10 bg-gray-200 rounded w-full"></div>
         <div className="h-10 bg-gray-200 rounded w-full"></div>
         <div className="h-10 bg-gray-200 rounded w-full"></div>
       </div>
@@ -88,17 +91,35 @@ const CategoryFilter = ({ onCategoryChange }) => {
           All Categories
         </button>
         {categories.map((category) => (
-          <button
-            key={category._id}
-            onClick={() => handleCategoryClick(category._id)}
-            className={`w-full text-left px-3 py-2 rounded transition-colors duration-150 ${
-              selectedCategory === category._id
-                ? 'bg-primary-50 text-primary-600'
-                : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
-            }`}
-          >
-            {category.name}
-          </button>
+          <div key={category._id}>
+            <button
+              onClick={() => handleCategoryClick(category._id)}
+              className={`w-full text-left px-3 py-2 rounded transition-colors duration-150 ${
+                selectedCategory === category._id
+                  ? 'bg-primary-50 text-primary-600'
+                  : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+              }`}
+            >
+              {category.name}
+            </button>
+            {category.subcategories && category.subcategories.length > 0 && (
+              <div className="ml-4 mt-1 space-y-1">
+                {category.subcategories.map((subcat) => (
+                  <button
+                    key={subcat._id}
+                    onClick={() => handleCategoryClick(subcat._id)}
+                    className={`w-full text-left px-3 py-1.5 rounded transition-colors duration-150 text-sm ${
+                      selectedCategory === subcat._id
+                        ? 'bg-primary-50 text-primary-600'
+                        : 'text-gray-600 hover:bg-primary-50 hover:text-primary-600'
+                    }`}
+                  >
+                    {subcat.name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </div>

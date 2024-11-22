@@ -28,7 +28,11 @@ export default async function handler(req, res) {
         try {
           console.log('Executing categories query...');
           let categories = await Category.find({})
-            .select('name description slug') 
+            .select('name description slug parent') // Include all required fields
+            .populate({
+              path: 'subcategories',
+              select: 'name slug',
+            })
             .lean()
             .maxTimeMS(5000);
           
@@ -36,14 +40,61 @@ export default async function handler(req, res) {
           if (categories.length === 0) {
             console.log('No categories found, creating defaults...');
             const defaultCategories = [
-              { name: 'Furniture', slug: 'furniture' },
-              { name: 'Decor', slug: 'decor' },
-              { name: 'Lighting', slug: 'lighting' },
-              { name: 'Textiles', slug: 'textiles' }
+              {
+                name: 'Film & TV',
+                slug: 'film-tv',
+                subcategories: [
+                  { name: 'Period Drama', slug: 'period-drama' },
+                  { name: 'Contemporary', slug: 'contemporary' },
+                  { name: 'Sci-Fi', slug: 'sci-fi' }
+                ]
+              },
+              {
+                name: 'Theatre',
+                slug: 'theatre',
+                subcategories: [
+                  { name: 'Stage Props', slug: 'stage-props' },
+                  { name: 'Set Design', slug: 'set-design' }
+                ]
+              },
+              {
+                name: 'Events',
+                slug: 'events',
+                subcategories: [
+                  { name: 'Corporate', slug: 'corporate' },
+                  { name: 'Wedding', slug: 'wedding' },
+                  { name: 'Party', slug: 'party' }
+                ]
+              }
             ];
-            
-            categories = await Category.insertMany(defaultCategories);
-            console.log('Created default categories:', categories);
+
+            // First create main categories
+            const mainCats = await Category.insertMany(
+              defaultCategories.map(({ name, slug }) => ({ name, slug }))
+            );
+
+            // Then create subcategories with proper parent references
+            for (let i = 0; i < defaultCategories.length; i++) {
+              const mainCat = mainCats[i];
+              const subCats = defaultCategories[i].subcategories;
+              
+              await Category.insertMany(
+                subCats.map(sub => ({
+                  ...sub,
+                  parent: mainCat._id
+                }))
+              );
+            }
+
+            // Fetch the newly created categories with their subcategories
+            categories = await Category.find({})
+              .select('name description slug parent')
+              .populate({
+                path: 'subcategories',
+                select: 'name slug',
+              })
+              .lean()
+              .maxTimeMS(5000);
           }
           
           console.log(`Query successful, found ${categories.length} categories`);
@@ -63,17 +114,6 @@ export default async function handler(req, res) {
       case 'POST':
         try {
           const categoryData = req.body;
-          
-          if (!categoryData.name) {
-            return res.status(400).json({
-              success: false,
-              message: 'Category name is required'
-            });
-          }
-
-          // Set default values for optional fields
-          categoryData.description = categoryData.description || '';
-
           const category = await Category.create(categoryData);
           return res.status(201).json({
             success: true,
@@ -96,7 +136,7 @@ export default async function handler(req, res) {
         });
     }
   } catch (error) {
-    console.error('Unhandled error in categories API:', error);
+    console.error('Unhandled error:', error);
     return res.status(500).json({
       success: false,
       message: 'Internal server error',
